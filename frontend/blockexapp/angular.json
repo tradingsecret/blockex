@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "blockexapp"
+  "defaultProject": "blockexapp",
+  "cli": {
+    "defaultCollection": "@nativescript/schematics"
+  }
 }
