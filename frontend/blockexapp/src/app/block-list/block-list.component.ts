@@ -2,10 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../services';
 import { ChartsComponent } from '../charts-component/charts-component.component';
 import { blockListConsts } from '../consts';
-
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {PageEvent} from '@angular/material';
 import { Router} from '@angular/router';
+
+/* tns */
+import { SearchBar } from "tns-core-modules/ui/search-bar";
+import { Page } from "tns-core-modules/ui/page";
+
 
 @Component({
   selector: 'app-block-list',
@@ -30,6 +34,8 @@ export class BlockListComponent implements OnInit {
   next : string;
   prev : string;
 
+  searchItem : string;
+
   displayedColumns : string[] = ['height', 'hash', 'age',
       'difficulty', 'inputs', 'outputs', 'kernels', 'actions'];
 
@@ -37,7 +43,7 @@ export class BlockListComponent implements OnInit {
   loading_blocks : boolean = false;
   loading_charts : boolean = false;
 
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router, private pageTns: Page) {}
 
   public loadBlocks(event?:PageEvent){
 
@@ -116,7 +122,28 @@ export class BlockListComponent implements OnInit {
     })
   }
 
+  /* tns */
+
+  public onSubmit(args) {
+      let searchBar = <SearchBar>args.object;
+      alert("You are searching for " + searchBar.text);
+  }
+
+  public searchBarLoaded(args){
+    let searchBar:SearchBar = <SearchBar>args.object;
+    //if(isAndroid){
+      searchBar.android.clearFocus();
+    //}
+  }
+
+  public onTextChanged(args) {
+      let searchBar = <SearchBar>args.object;
+      console.log("SearchBar text changed! New value: " + searchBar.text);
+  }
+
   ngOnInit() {
+    this.pageTns.actionBarHidden = true;
+
     //setInterval(() => this.updateBlocks(), 60000);
     this.loading_status = true;
     this.loading_charts = true;

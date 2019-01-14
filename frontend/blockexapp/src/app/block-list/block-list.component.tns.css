@@ -1,0 +1,22 @@
+.block-card{
+  margin-bottom: 5px;
+}
+
+.block-card Label{
+  color: #323232;
+  font-size: 16pt;
+  margin-left: 20px;
+}
+
+.blocks-list-title{
+  height: 30px;
+  font-weight: bold;
+  font-size: 20pt;
+  padding-left: 10px;
+  background: #3f51b5;
+  color: #ffffff;
+}
+
+.search-bar{
+  background: #bdbdbd;
+}

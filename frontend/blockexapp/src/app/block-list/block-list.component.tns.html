@@ -1,0 +1,27 @@
+<StackLayout>
+  <SearchBar hint="Search by hash, kernel" [text]="searchItem" (textChange)="onTextChanged($event)"
+             (submit)="onSubmit($event)" color="white" (loaded)="searchBarLoaded($event)"
+             textFieldHintColor="white" class="search-bar"></SearchBar>
+  <Progress [value]="loading_status || loading_blocks || loading_charts"
+          maxValue="100" class="m-20">
+  </Progress>
+  <StackLayout class="block-card">
+    <Label [text]="'Blockchain height: ' + status?.height" class="label"></Label>
+    <Label [text]="'Latest block: ' + (status?.timestamp | date:'medium')" class="label"></Label>
+    <Label [text]="'Latest block difficulty: ' + (status?.difficulty | number:'.')" class="label"></Label>
+    <Label [text]="'Total emission: ' + (status?.total_emission | number:'.') + ' beam'" class="label"></Label>
+    <Label [text]="'Hashrate: ' + (status?.difficulty / 60 | number:'.')  + ' Sol/s'" class="label"></Label>
+	</StackLayout>
+  <StackLayout>
+      <Label [text]="'BLOCKS'" class="blocks-list-title"></Label>
+  </StackLayout>
+  <StackLayout>
+      <ListView [items]="blocks" class="list-group">
+          <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+              <GridLayout class="list-group-item" [class.odd]="odd" [class.even]="even">
+                  <Label [text]="item.height" android:class="label-item"></Label>
+              </GridLayout>
+          </ng-template>
+      </ListView>
+  </StackLayout>
+</StackLayout>
