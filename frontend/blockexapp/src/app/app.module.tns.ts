@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module.tns';
 import { AppComponent } from './app.component';
-import { BlockListComponent } from './block-list/block-list.component';
+import { BlockListComponentTns } from './block-list/block-list.component.tns';
+import { BlockDetailsComponentTns } from './block-details/block-details.component.tns';
 
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -16,7 +17,8 @@ import { BlockListComponent } from './block-list/block-list.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BlockListComponent,
+    BlockListComponentTns,
+    BlockDetailsComponentTns,
   ],
   imports: [
     NativeScriptModule,

@@ -6,10 +6,6 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {PageEvent} from '@angular/material';
 import { Router} from '@angular/router';
 
-/* tns */
-import { SearchBar } from "tns-core-modules/ui/search-bar";
-import { Page } from "tns-core-modules/ui/page";
-
 
 @Component({
   selector: 'app-block-list',
@@ -43,7 +39,9 @@ export class BlockListComponent implements OnInit {
   loading_blocks : boolean = false;
   loading_charts : boolean = false;
 
-  constructor(private dataService: DataService, private router: Router, private pageTns: Page) {}
+  constructor(
+    private dataService: DataService,
+    private router: Router) {}
 
   public loadBlocks(event?:PageEvent){
 
@@ -122,28 +120,7 @@ export class BlockListComponent implements OnInit {
     })
   }
 
-  /* tns */
-
-  public onSubmit(args) {
-      let searchBar = <SearchBar>args.object;
-      alert("You are searching for " + searchBar.text);
-  }
-
-  public searchBarLoaded(args){
-    let searchBar:SearchBar = <SearchBar>args.object;
-    //if(isAndroid){
-      searchBar.android.clearFocus();
-    //}
-  }
-
-  public onTextChanged(args) {
-      let searchBar = <SearchBar>args.object;
-      console.log("SearchBar text changed! New value: " + searchBar.text);
-  }
-
   ngOnInit() {
-    this.pageTns.actionBarHidden = true;
-
     //setInterval(() => this.updateBlocks(), 60000);
     this.loading_status = true;
     this.loading_charts = true;
