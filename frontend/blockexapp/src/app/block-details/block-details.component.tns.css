@@ -13,6 +13,18 @@
   margin-left: 20%;
 }
 
+.item-name-inputs{
+  padding: 10px;
+}
+
+.item-details-inputs{
+  padding: 10px;
+}
+
+.labels-stack-layout{
+  padding-top: 30px;
+}
+
 .list-group-item{
   padding: 10px;
 }
@@ -26,6 +38,11 @@
 }
 
 .main-grid-layout{
+  overflow: scroll;
   margin-top: 20px;
   margin-left: 10px;
+}
+
+.item-disc{
+  margin-left: 10;
 }

@@ -17,7 +17,7 @@ import { Page } from "tns-core-modules/ui/page";
 })
 export class BlockListComponentTns implements OnInit {
   private _dataItems: ObservableArray<any>;
-    private layout: ListViewLinearLayout;
+  private layout: ListViewLinearLayout;
 
   status : any; // basically latest block and some data
   blocks : any;
@@ -53,7 +53,25 @@ export class BlockListComponentTns implements OnInit {
 
   public onSubmit(args) {
       let searchBar = <SearchBar>args.object;
-      alert("You are searching for " + searchBar.text);
+      if (searchBar.text !== undefined && searchBar.text.length > 0) {
+        this.loading_blocks = true;
+        this.dataService.searchBlock(searchBar.text).subscribe((blockItem) => {
+          this.loading_blocks = false;
+          if (blockItem.found !== undefined && !blockItem.found) {
+            this.router.navigate(
+              ['/block-not-found']
+            );
+          } else if (blockItem.hash !== undefined){
+            this.router.navigate(
+              ['/block', blockItem.hash]
+            );
+          }
+        }, (error) => {
+            this.router.navigate(
+                ['/block-not-found']
+            );
+        });
+      }
   }
 
   public searchBarLoaded(args){
@@ -65,7 +83,6 @@ export class BlockListComponentTns implements OnInit {
 
   public onTextChanged(args) {
       let searchBar = <SearchBar>args.object;
-      console.log("SearchBar text changed! New value: " + searchBar.text);
   }
 
   public showBlockDetails(hash) {
@@ -79,9 +96,9 @@ export class BlockListComponentTns implements OnInit {
     this.loading_status = true;
 
     this.layout = new ListViewLinearLayout();
-        this.layout.scrollDirection = "Vertical";
-        this._changeDetectionRef.detectChanges();
-        this._dataItems = new ObservableArray<any>();
+      this.layout.scrollDirection = "Vertical";
+      this._changeDetectionRef.detectChanges();
+      this._dataItems = new ObservableArray<any>();
 
 
     this.dataService.loadStatus().subscribe((status) => {
@@ -93,19 +110,19 @@ export class BlockListComponentTns implements OnInit {
   }
 
   public get dataItems(): ObservableArray<any> {
-        return this._dataItems;
-    }
+    return this._dataItems;
+  }
 
-    public onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
-      const listView: RadListView = args.object;
-      this.dataService.loadBlocks().subscribe((data) => {
-        this.loading_blocks = false;
-        this.blocks = data['results'];
+  public onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
+    const listView: RadListView = args.object;
+    this.dataService.loadBlocks(this.page).subscribe((data) => {
+      this.loading_blocks = false;
+      this.blocks = data['results'];
 
-        this.dataItems.push(data['results']);
-        listView.notifyLoadOnDemandFinished();
-        this.page++;
-        args.returnValue = true;
-       });
-    }
+      this.dataItems.push(data['results']);
+      listView.notifyLoadOnDemandFinished();
+      this.page++;
+      args.returnValue = true;
+     });
+  }
 }
