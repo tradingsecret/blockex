@@ -1,9 +1,51 @@
-<ActionBar>
+<ActionBar class="block-details-header">
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-    <Label text="block-details works" textWrap="true"></Label>
+    <Label [text]="block.header" textWrap="true"></Label>
 </ActionBar>
 
 
-<StackLayout>
-    <Label text="block-details works" textWrap="true"></Label>
-</StackLayout>
+<GridLayout class="main-grid-layout" >
+    <GridView [itemTemplateSelector]="templateSelector" [items]="block.data" colWidth="100%" rowHeight="8%">
+        <ng-template nsTemplateKey="Block" let-item="item" let-odd="odd">
+            <GridLayout class="block-item-row">
+                <Label col="0" [text]="item.name" class="item-name"></Label>
+                <Label col="1" [text]="item.value + ' ' + item.additional" textWrap="true" class="item-details"></Label>
+            </GridLayout>
+        </ng-template>
+
+        <Label text="Inputs" class="item-name"></Label>
+        <ng-template nsTemplateKey="Inputs" let-item="item" let-odd="odd">
+            <GridLayout verticalAlignment="stretch">
+                <Label row="0" col="0" text="Commitment" class="item-name"></Label>
+                <Label row="0" col="1" [text]="item.commitment" textWrap="true" class="item-details"></Label>
+                <Label row="1" col="0" text="Maturity" class="item-name"></Label>
+                <Label row="1" col="1" [text]="item.maturity" textWrap="true" class="item-details"></Label>
+            </GridLayout>
+        </ng-template>
+
+        <Label text="Outputs" class="item-name"></Label>
+        <ng-template nsTemplateKey="Outputs" let-item="item" let-odd="odd">
+            <GridLayout verticalAlignment="stretch">
+                <Label row="0" col="0" text="Commitment" class="item-name"></Label>
+                <Label row="0" col="1" [text]="item.commitment" textWrap="true" class="item-details"></Label>
+                <Label row="1" col="0" text="Maturity" class="item-name"></Label>
+                <Label row="1" col="1" [text]="item.maturity" textWrap="true" class="item-details"></Label>
+                <Label row="2" col="0" text="Coinbase" class="item-name"></Label>
+                <Label row="2" col="1" [text]="item.coinbase" textWrap="true" class="item-details"></Label>
+            </GridLayout>
+        </ng-template>
+
+        <ng-template nsTemplateKey="Kernels" let-item="item" let-odd="odd">
+            <GridLayout verticalAlignment="stretch">
+                <Label row="0" col="0" text="Fee" class="item-name"></Label>
+                <Label row="0" col="1" [text]="item.fee" textWrap="true" class="item-details"></Label>
+                <Label row="1" col="0" text="Excess" class="item-name"></Label>
+                <Label row="1" col="1" [text]="item.excess" textWrap="true" class="item-details"></Label>
+                <Label row="2" col="0" text="Id" class="item-name"></Label>
+                <Label row="2" col="1" [text]="item.id" textWrap="true" class="item-details"></Label>
+            </GridLayout>
+        </ng-template>
+    </GridView>
+</GridLayout>
+
+

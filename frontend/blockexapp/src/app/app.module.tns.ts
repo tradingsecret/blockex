@@ -12,6 +12,7 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { GridViewModule } from "nativescript-grid-view/angular";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
@@ -30,7 +31,8 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
     HttpClientModule,
     NativeScriptUIListViewModule,
     NativeScriptCommonModule,
-    NativeScriptFormsModule
+    NativeScriptFormsModule,
+    GridViewModule
   ],
   providers: [],
   bootstrap: [AppComponent],

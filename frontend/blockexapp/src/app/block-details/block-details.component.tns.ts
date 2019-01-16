@@ -39,31 +39,41 @@ export class BlockDetailsComponentTns implements OnInit {
     this.loading_block = true;
     this.block = {
       header: '',
-      data: [],
-      inputs: [],
-      outputs: [],
-      kernels: []
+      data: []
     };
     this.route.params.subscribe( (params) => {
       this.dataService.loadBlock(params.hash).subscribe((blockItem) => {
         this.block.header = 'Block ' + blockItem.height;
         this.block.data = [
-          {name: 'Fee', value: blockItem.fee, additional: blockItem.fee !== 0 ? 'Groth' : ''},
-          {name: 'Hash', value: blockItem.hash, additional: ''},
-          {name: 'Difficulty', value: blockItem.difficulty.toLocaleString(), additional: ''},
-          {name: 'Subsidy', value: blockItem.subsidy.toLocaleString(), additional: 'Groth'},
-          {name: 'Chainwork', value: blockItem.chainwork, additional: ''},
-          {name: 'Age', value: new Date(blockItem.timestamp).toLocaleDateString("en-US", {
+          {name: 'Fee', role: 'Block', value: blockItem.fee, additional: blockItem.fee !== 0 ? 'Groth' : ''},
+          {name: 'Hash', role: 'Block', value: blockItem.hash, additional: ''},
+          {name: 'Difficulty', role: 'Block', value: blockItem.difficulty.toLocaleString(), additional: ''},
+          {name: 'Subsidy', role: 'Block', value: blockItem.subsidy.toLocaleString(), additional: 'Groth'},
+          {name: 'Chainwork', role: 'Block', value: blockItem.chainwork, additional: ''},
+          {name: 'Age', role: 'Block', value: new Date(blockItem.timestamp).toLocaleDateString("en-US", {
             year: 'numeric', month: 'long',
             day: 'numeric', hour: 'numeric',
             minute: 'numeric', second: 'numeric' }), additional: ''}
         ];
-        this.block.inputs = blockItem.inputs;
-        this.block.outputs = blockItem.outputs;
-        this.block.kernels = blockItem.kernels;
+
+        this.block.data = this.block.data.concat(blockItem.inputs.map((item) => {
+          item['role'] = "Inputs";
+          return item;
+        }));
+        this.block.data = this.block.data.concat(blockItem.outputs.map((item) => {
+          item['role'] = "Outputs";
+          return item;
+        }));
+        this.block.data = this.block.data.concat(blockItem.kernels.map((item) => {
+          item['role'] = "Kernels";
+          return item;
+        }));
       });
       this.loading_block = false;
     });
   }
 
+  public templateSelector(item: any) {
+    return item.role;
+  }
 }

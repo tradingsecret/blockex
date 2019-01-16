@@ -1,5 +1,31 @@
-/*
-Add your NativeScript specific styles here.
-To learn more about styling in NativeScript see:
-https://docs.nativescript.org/angular/ui/styling
-*/
+.block-details-header{
+  background: #bdbdbd;
+  font-weight: bold;
+  font-size: 26pt;
+  color: #ffffff;
+}
+
+.item-name{
+
+}
+
+.item-details{
+  margin-left: 20%;
+}
+
+.list-group-item{
+  padding: 10px;
+}
+
+.item-comit-value{
+  margin-left: 80px;
+}
+
+.item-maturity-value{
+  margin-left: 80px;
+}
+
+.main-grid-layout{
+  margin-top: 20px;
+  margin-left: 10px;
+}
