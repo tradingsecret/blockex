@@ -35,7 +35,7 @@ export class BlockDetailsComponentTns implements OnInit {
   }
 
   ngOnInit() {
-    this.pageTns.actionBarHidden = true;
+     //this.pageTns.actionBarHidden = true;
     this.loading_block = true;
     this.block = {
       header: '',

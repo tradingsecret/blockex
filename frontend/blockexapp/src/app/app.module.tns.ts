@@ -8,6 +8,10 @@ import { BlockListComponentTns } from './block-list/block-list.component.tns';
 import { BlockDetailsComponentTns } from './block-details/block-details.component.tns';
 
 
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+
+import { NativeScriptCommonModule } from "nativescript-angular/common";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
@@ -23,7 +27,10 @@ import { BlockDetailsComponentTns } from './block-details/block-details.componen
   imports: [
     NativeScriptModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NativeScriptUIListViewModule,
+    NativeScriptCommonModule,
+    NativeScriptFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

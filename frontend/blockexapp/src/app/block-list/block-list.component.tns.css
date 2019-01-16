@@ -24,3 +24,7 @@
   color: #497DDD;
   text-align: right;
 }
+
+.list-group-item{
+  padding: 10px;
+}

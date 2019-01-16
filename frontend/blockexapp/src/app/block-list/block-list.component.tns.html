@@ -13,17 +13,19 @@
       <StackLayout>
           <Label [text]="'BLOCKS'" class="blocks-list-title"></Label>
       </StackLayout>
-      <StackLayout>
-          <ListView [items]="blocks" class="list-group">
-              <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                  <GridLayout class="list-group-item" (tap)="showBlockDetails(item.hash)" [class.odd]="odd" [class.even]="even">
-                      <Label [text]="item.height" android:class="label-item"></Label>
-                      <Label text="View details >" class="item-details" android:class="label-item"></Label>
-                  </GridLayout>
+      <GridLayout>
+          <RadListView loadOnDemandMode="Manual" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)" [items]="dataItems">
+              <ng-template tkListItemTemplate let-item="item">
+                  <StackLayout orientation="vertical">
+                      <GridLayout class="list-group-item" (tap)="showBlockDetails(item.hash)" [class.odd]="odd" [class.even]="even">
+                          <Label [text]="item.height" android:class="label-item"></Label>
+                          <Label text="View details >" class="item-details" android:class="label-item"></Label>
+                      </GridLayout>
+                  </StackLayout>
               </ng-template>
-          </ListView>
-      </StackLayout>
+          </RadListView>
+      </GridLayout>
   </StackLayout>
-  <ActivityIndicator row="1" #activityIndicator [busy]="loading_status || loading_blocks"
+  <ActivityIndicator #activityIndicator [busy]="loading_status || loading_blocks"
                      width="150" height="150" class="activity-indicator"></ActivityIndicator>
 </StackLayout>
