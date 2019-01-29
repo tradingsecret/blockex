@@ -1,6 +1,7 @@
     <mat-progress-bar mode="indeterminate" *ngIf="loading_status || loading_blocks || loading_charts"></mat-progress-bar>
     <!-- Some charts -->
     <section class="overview-container" *ngIf="!loading_status">
+      <app-network-control></app-network-control>
       <div class="chart-container">
           <div class="chart">
               <app-charts-component (chartsLoaded)="onChartsLoaded($event)"
@@ -12,96 +13,167 @@
       <!-- Height -->
       <section>
         <mat-card class="block-card height-card">
-          <mat-card-header>
-            <mat-card-subtitle>Blockchain height:</mat-card-subtitle>
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Blockchain height:</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="block-card-content">
-            <h2>{{status?.height}}</h2>
+            <h2 class="block-card-content-title">{{status?.height}}</h2>
           </mat-card-content>
         </mat-card>
-        <mat-card class="block-card">
-          <mat-card-header>
-            <mat-card-subtitle>Latest block:</mat-card-subtitle>
+
+        <mat-card class="block-card latest-block-card">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Latest block:</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="block-card-content">
-            <h2>{{status?.timestamp | date:'medium'}}</h2>
+            <h2 class="block-card-content-title">{{status?.timestamp | date:'medium'}}</h2>
           </mat-card-content>
         </mat-card>
+
         <mat-card class="block-card difficulty-card">
-          <mat-card-header>
-            <mat-card-subtitle>Latest block difficulty:</mat-card-subtitle>
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Latest block difficulty:</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="block-card-content">
-            <h2>{{status?.difficulty | number:'.'}}</h2>
+            <h2 class="block-card-content-title">{{status?.difficulty | number:'.'}}</h2>
           </mat-card-content>
         </mat-card>
-        <mat-card class="block-card emission-block">
-          <mat-card-header>
-            <mat-card-subtitle>Total emission:</mat-card-subtitle>
+
+        <mat-card class="block-card coins-mined-block">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Coins in circulation (mined):</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="block-card-content">
-            <h2>{{status?.total_emission | number:'.'}} beam</h2>
+            <h2 class="block-card-content-title">{{status?.coins_in_circulation_mined | number:'.'}} Beams</h2>
           </mat-card-content>
         </mat-card>
+
+        <mat-card class="block-card coins-treasury-block">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Coins in circulation (treasury):</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="block-card-content">
+            <h2 class="block-card-content-title">{{status?.coins_in_circulation_treasury | number:'.'}} Beams</h2>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="block-card total-coins-block">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Total coins in circulation:</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="block-card-content">
+            <h2 class="block-card-content-title">{{status?.total_coins_in_circulation | number:'.'}} Beams</h2>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="block-card next-treasury-height-block">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Next treasury emission block height:</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="block-card-content">
+            <h2 class="block-card-content-title">{{status?.next_treasury_emission_block_height | number:'.'}}</h2>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="block-card next-treasury-amount-block">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Next treasury emission coin amount:</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="block-card-content">
+            <h2 class="block-card-content-title">{{status?.next_treasury_emission_coin_amount | number:'.'}} Beams</h2>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="block-card total-emission-block">
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Total emission:</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="block-card-content">
+            <h2 class="block-card-content-title">{{status?.total_emission | number:'.'}} Beams</h2>
+          </mat-card-content>
+        </mat-card>
+
         <mat-card class="block-card hashrate-block">
-          <mat-card-header>
-            <mat-card-subtitle>Hashrate:</mat-card-subtitle>
+          <mat-card-header class="block-card-header">
+            <mat-card-subtitle class="block-card-header-title">Hashrate:</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="block-card-content">
-            <h2>{{status?.difficulty / 60 | number:'.'}} Sol/s</h2>
+            <h2 class="block-card-content-title">{{status?.difficulty / 60 | number:'.'}} Sol/s</h2>
           </mat-card-content>
         </mat-card>
       </section>
     </section>
     <div style="clear: both"></div>
     <!-- Top blocks section-->
-    <section *ngIf="!loading_status">
+<section *ngIf="!loading_status">
       <mat-paginator [pageSize]="20" [pageIndex]="page" [length]="count" (page)="pageEvent = loadBlocks($event)" showFirstLastButtons></mat-paginator>
       <mat-card *ngIf="!loading_blocks">
-        <mat-card-content>
-          <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-card-content class="table-container">
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- Height Column -->
             <ng-container matColumnDef="height">
-              <th mat-header-cell *matHeaderCellDef> Height </th>
-              <td mat-cell *matCellDef="let element"> {{element.height}} </td>
+              <mat-header-cell class="height-cell-header" *matHeaderCellDef> Height </mat-header-cell>
+              <mat-cell class="height-cell" *matCellDef="let element">
+                <span class="mobile-label">Height:</span>
+                {{element.height}}
+              </mat-cell>
             </ng-container>
             <!-- Hash Column -->
             <ng-container matColumnDef="hash">
-              <th mat-header-cell *matHeaderCellDef> Hash </th>
-              <td mat-cell *matCellDef="let element">
-                <a [routerLink]="['/block', element.hash]">{{element.hash}}</a></td>
+              <mat-header-cell class="hash-cell-header" *matHeaderCellDef> Hash </mat-header-cell>
+              <mat-cell class="hash-cell" *matCellDef="let element">
+                <span class="mobile-label">Hash:</span>
+                <span class="block-details-link" [routerLink]="['/block', element.hash]">
+                  {{element.hash}}
+                </span>
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="age">
-              <th mat-header-cell *matHeaderCellDef> Age </th>
-              <td mat-cell *matCellDef="let element"> {{element.timestamp | date:'medium'}} </td>
+              <mat-header-cell class="age-cell-header" *matHeaderCellDef> Age </mat-header-cell>
+              <mat-cell class="age-cell" *matCellDef="let element">
+                <span class="mobile-label">Age:</span>
+                {{element.timestamp | date:'medium'}}
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="difficulty">
-              <th mat-header-cell *matHeaderCellDef> Difficulty </th>
-              <td mat-cell *matCellDef="let element"> {{element.difficulty | number:'.'}} </td>
+              <mat-header-cell *matHeaderCellDef> Difficulty </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label">Difficulty:</span>
+                {{element.difficulty | number:'.'}}
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="inputs">
-              <th mat-header-cell *matHeaderCellDef> # inputs </th>
-              <td mat-cell *matCellDef="let element"> {{element.inputs.length}} </td>
+              <mat-header-cell *matHeaderCellDef> # inputs </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label"># inputs:</span>
+                {{element.inputs.length}}
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="outputs">
-              <th mat-header-cell *matHeaderCellDef> # outputs </th>
-              <td mat-cell *matCellDef="let element"> {{element.outputs.length}} </td>
+              <mat-header-cell *matHeaderCellDef> # outputs </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label"># outputs:</span>
+                {{element.outputs.length}}
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="kernels">
-              <th mat-header-cell *matHeaderCellDef> # kernels </th>
-              <td mat-cell *matCellDef="let element"> {{element.kernels.length}} </td>
+              <mat-header-cell *matHeaderCellDef> # kernels </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <span class="mobile-label"># kernels:</span>
+                {{element.kernels.length}}
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let element">
+              <mat-header-cell class="actions-cell-header" *matHeaderCellDef></mat-header-cell>
+              <mat-cell class="actions-cell" *matCellDef="let element">
                 <button mat-icon-button (click)="showBlockDetails(element.hash)" >
                   <mat-icon aria-label="Details">details</mat-icon>
                 </button>
-              </td>
+              </mat-cell>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
         </mat-card-content>
       </mat-card>
     </section>

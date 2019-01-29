@@ -104,6 +104,7 @@ export class ChartsComponent implements OnInit {
           }
         },
         responsive: true,
+        maintainAspectRatio: false,
         title: {
           display: true,
           text: 'Blocks and Difficulty'
@@ -120,7 +121,7 @@ export class ChartsComponent implements OnInit {
             minUnit: 'hour',
             time: {
               displayFormats: {
-                hour: 'MMM D, h:mm A'
+                hour: 'MMM D'
               }
             },
             display: true
@@ -180,6 +181,7 @@ export class ChartsComponent implements OnInit {
           }
         },
         responsive: true,
+        maintainAspectRatio: false,
         title: {
           display: true,
           text: 'Fee'
@@ -196,7 +198,7 @@ export class ChartsComponent implements OnInit {
             minUnit: 'hour',
             time: {
               displayFormats: {
-                hour: 'MMM D, h:mm A'
+                hour: 'MMM D'
               }
             },
             display: true

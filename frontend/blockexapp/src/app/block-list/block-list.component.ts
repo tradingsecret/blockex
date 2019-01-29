@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../services';
 import { ChartsComponent } from '../charts-component/charts-component.component';
-import { blockListConsts } from '../consts';
+import { blockListConsts, routesConsts } from '../consts';
+
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {PageEvent} from '@angular/material';
 import { Router} from '@angular/router';
-
 
 @Component({
   selector: 'app-block-list',
@@ -30,8 +30,6 @@ export class BlockListComponent implements OnInit {
   next : string;
   prev : string;
 
-  searchItem : string;
-
   displayedColumns : string[] = ['height', 'hash', 'age',
       'difficulty', 'inputs', 'outputs', 'kernels', 'actions'];
 
@@ -39,9 +37,7 @@ export class BlockListComponent implements OnInit {
   loading_blocks : boolean = false;
   loading_charts : boolean = false;
 
-  constructor(
-    private dataService: DataService,
-    private router: Router) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   public loadBlocks(event?:PageEvent){
 
@@ -70,13 +66,13 @@ export class BlockListComponent implements OnInit {
 
   public showCharts() {
     this.router.navigate(
-      ['/charts', this.status.height]
+      [routesConsts.CHARTS, this.status.height]
     );
   }
 
   public showBlockDetails(hash) {
     this.router.navigate(
-      ['/block', hash]
+      [routesConsts.BLOCK_DETAILS, hash]
     );
   }
 

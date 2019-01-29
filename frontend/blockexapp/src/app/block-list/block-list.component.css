@@ -3,7 +3,7 @@
     height: 700px;
 }
 
-table {
+.mat-table {
   width: 100%;
 }
 
@@ -16,7 +16,7 @@ table {
     display: inline-table;
     width:100%;
     height:350px;
-    padding:20px;
+    padding:5px;
     border:1px solid #eee;
 }
 
@@ -24,7 +24,7 @@ table {
     margin:1em 2em;
     width:310px;
     float:left;
-    padding-left: 30px;
+    padding: 10px 0;
 }
 
 .height-card {
@@ -44,8 +44,69 @@ table {
 }
 
 .block-card-content {
+    margin: 0 16px;
     font-size: 10pt;
-    padding: 30px;
+}
+
+.next-treasury-amount-block,
+.next-treasury-height-block {
+    min-width: 260px;
+}
+
+.total-coins-block,
+.total-emission-block {
+    max-width: 240px;
+}
+
+.coins-treasury-block {
+    max-width: 225px;
+}
+
+.latest-block-card {
+    min-width: 280px;
+}
+
+.hashrate-block {
+    max-width: 230px;
+}
+
+.block-details-link {
+    cursor: pointer;
+    color: rgb(0, 0, 238);
+}
+
+.height-cell,
+.height-cell-header{
+    max-width: 90px;
+}
+
+.hash-cell,
+.hash-cell-header{
+    min-width: 530px;
+}
+
+.age-cell,
+.age-cell-header{
+    min-width: 170px;
+}
+
+.actions-cell,
+.actions-cell-header{
+    max-width: 25px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.mat-table {
+    overflow: auto;
+}
+
+.mobile-label {
+    display: none;
 }
 
 @media all and (max-width: 1599px) {
@@ -56,15 +117,87 @@ table {
     .block-card {
         margin:0.5em;
         width: 260px;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media all and (max-width: 1359px) {
+    .block-card {
+        width: 225px;
     }
 
-    .block-card-content {
-        padding: 5px;
+    .height-card {
+        max-width:135px;
     }
 
-    .chart-container {
-        padding: 5px;
+    .latest-block-card {
+        min-width: 235px;
     }
+
+    .difficulty-card {
+        max-width: 150px;
+    }
+
+    .total-emission-block,
+    .total-coins-block,
+    .coins-mined-block {
+        max-width: 185px;
+    }
+
+    .next-treasury-amount-block,
+    .next-treasury-height-block {
+        min-width: 235px;
+    }
+
+    .hashrate-block {
+        max-width: 180px;
+    }
+
+    .coins-treasury-block {
+        max-width: 195px;
+    }
+
+    .block-card-header-title {
+        font-size: 12px;
+    }
+
+    .block-card-content-title {
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 600px) {
+  .mobile-label {
+      width: 80px;
+      display: inline-block;
+      font-weight: bold;
+  }
+
+  .mat-header-row {
+      display: none;
+  }
+
+  .mat-row {
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+      max-height: 370px;
+  }
+
+  .hash-cell {
+      min-width: 200px;
+  }
+
+  .height-cell {
+      padding-left: 90px;
+  }
+
+  .block-details-link {
+      max-width: 200px;
+  }
+
+  .actions-cell {
+      display: none;
+  }
 }
