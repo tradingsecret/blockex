@@ -28,3 +28,11 @@
 .list-group-item{
   padding: 30px;
 }
+
+.item-label{
+  font-weight: bold;
+}
+
+.item-value{
+  padding: 10px 0 10px 40px;
+}

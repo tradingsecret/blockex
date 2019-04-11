@@ -9,7 +9,7 @@ import { BlockDetailsComponentTns } from './block-details/block-details.componen
 
 
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
-
+import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { GridViewModule } from "nativescript-grid-view/angular";
@@ -30,6 +30,7 @@ import { GridViewModule } from "nativescript-grid-view/angular";
     AppRoutingModule,
     HttpClientModule,
     NativeScriptUIListViewModule,
+    NativeScriptUIChartModule,
     NativeScriptCommonModule,
     NativeScriptFormsModule,
     GridViewModule

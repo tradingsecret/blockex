@@ -9,7 +9,7 @@ import { Status, Block } from '../models';
 })
 export class DataService {
 
-  API_BASE = environment.apiBaseUrl ;
+  API_BASE = "https://staging-explorer.beam.mw";
 
   constructor(private http: HttpClient) { 
   }
@@ -31,6 +31,6 @@ export class DataService {
   }
 
   loadBlocksRange() {
-      return this.http.get<Block[]>(this.API_BASE + '/explorer/range/');
+      return this.http.get<Block[]>(this.API_BASE + '/explorer/range/?range=7');
   }
 }
