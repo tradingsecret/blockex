@@ -313,19 +313,11 @@ class BotView(View):
         except Exception as e:
             return JsonResponse({"ok": "POST request processed"})
 
-        #text = text.lstrip("/")
-
         Bot_users.objects.get_or_create(external_id=t_chat["id"])
 
         if text == "/start":
             msg = "Beam Explorer bot was started"
             self.send_message(self.load_token(), msg, t_chat["id"])
-        elif text == "/get_rollbacks":
-            rollback_heights = Rollback_reports.objects.all()
-            self.send_message(self.load_token(), 'Rollback history: ', t_chat["id"])
-            for rollback in rollback_heights:
-                self.send_message(self.load_token(), str(rollback.height_from)+' - '+str(rollback.height_to)+
-                    '. Depth='+str(rollback.height_to - rollback.height_from), t_chat["id"])
         else:
             msg = "Unknown command"
 
