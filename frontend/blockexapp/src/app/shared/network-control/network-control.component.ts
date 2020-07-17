@@ -28,7 +28,7 @@ export class NetworkControlComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.visible = this.router.url == routesConsts.HOME;
+    this.visible = this.router.url === routesConsts.HOME;
   }
 
 }

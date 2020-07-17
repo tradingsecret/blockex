@@ -15,18 +15,20 @@ export class HeaderComponentMobile implements OnInit {
   isMainnet: boolean = false;
   isMasternet: boolean = false;
   isSearchInputVisible: boolean = false;
-  activeSearchControl: boolean = false;
+  isAssetsButtonVisible: boolean = false;
+  isHome = false;
 
   constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit() {
     this.isMasternet = environment.masternet;
     this.isMainnet = environment.production;
+    this.isHome = this.router.url === routesConsts.HOME;
   }
 
   searchClicked() {
     this.isSearchInputVisible = !this.isSearchInputVisible;
-    this.activeSearchControl = !this.activeSearchControl;
+    this.isAssetsButtonVisible = false;
   }
 
   navigateToHomepage(){
@@ -36,7 +38,7 @@ export class HeaderComponentMobile implements OnInit {
   }
 
   searchProcess(input) {
-      let searchValue = input.value;
+      const searchValue = input.value;
       input.value = '';
       this.dataService.searchBlock(searchValue).subscribe((blockItem) => {
         if (blockItem.found !== undefined && !blockItem.found) {
@@ -54,5 +56,14 @@ export class HeaderComponentMobile implements OnInit {
               [routesConsts.BLOCK_NOT_FOUND]
           );
       });
+  }
+
+  assetsControlClicked() {
+    this.isAssetsButtonVisible = !this.isAssetsButtonVisible;
+    this.isSearchInputVisible = false;
+  }
+
+  assetsButtonClicked() {
+    this.router.navigate([routesConsts.CONFIDENTIAL_ASSETS_LIST]);
   }
 }

@@ -1,43 +1,37 @@
-<mat-toolbar class="header-toolbar"
-             [class.search-display]=isSearchInputVisible&&isHomepage
-             [class.search-hidden]=!isSearchInputVisible&&isHomepage
-             [class.search-display-details]=isSearchInputVisible&&!isHomepage
-             [class.search-hidden-details]=!isSearchInputVisible&&!isHomepage color="primary">
-    <div class="header-content"
-        [class.search-display]=isSearchInputVisible&&isHomepage
-        [class.search-hidden]=!isSearchInputVisible&&isHomepage
-        [class.search-display-details]=isSearchInputVisible&&!isHomepage
-        [class.search-hidden-details]=!isSearchInputVisible&&!isHomepage
-        >
-      <div class="header-title">
-        <img class="header-content-logo" src="assets/logo.svg" width=48 height=42 alt="">
-        <div class="logo-title-content" (click)="navigateToHomepage()">
-          <div class="logo-title-beam">BEAM</div>
-          <div class="logo-title-text">Block Explorer</div>
+<mat-toolbar [class.header-toolbar-home]="isHome"
+  [class.header-toolbar-else]="!isHome" 
+  [class.opened-home]="isHome && (isAssetsButtonVisible || isSearchInputVisible)" color="primary"
+  [class.opened-else]="!isHome && (isAssetsButtonVisible || isSearchInputVisible)" color="primary">
+    <div class="header-content">
+      <div class="header-content-top">
+        <div class="header-title">
+          <img class="header-content-logo" src="assets/logo.svg" width=48 height=42 alt="">
+          <div class="logo-title-content" (click)="navigateToHomepage()">
+            <div class="logo-title-beam">BEAM</div>
+            <div class="logo-title-text">Block Explorer</div>
+          </div>
         </div>
+        <div class="search-control"
+            [class.search]=!isSearchInputVisible
+            [class.decline]=isSearchInputVisible
+            (click)="searchClicked()"></div>
+        <div class="assets-control"
+            [class.accept]=!isAssetsButtonVisible
+            [class.decline]=isAssetsButtonVisible
+            (click)="assetsControlClicked()"></div>
       </div>
-      <div class="search-control"
-           [class.search]=!isSearchInputVisible
-           [class.decline]=isSearchInputVisible
-           (click)="searchClicked()"></div>
-      <app-network-control
-        [class.search-display]=isSearchInputVisible
-        [class.search-hidden]=!isSearchInputVisible
-        *ngIf="!isMasternet"></app-network-control>
-      <div class="search-input-container"
-           [class.search-display]=isSearchInputVisible&&isHomepage
-           [class.search-hidden]=!isSearchInputVisible&&isHomepage
-           [class.search-display-details]=isSearchInputVisible&&!isHomepage
-           [class.search-hidden-details]=!isSearchInputVisible&&!isHomepage>
+      <app-network-control class="network-controller" *ngIf="!isMasternet && isHome"></app-network-control>
+      <div class="search-input-container" *ngIf="isSearchInputVisible">
         <input class="search-header-input"
-               [class.search-display]=isSearchInputVisible&&isHomepage
-               [class.search-display-details]=isSearchInputVisible&&!isHomepage
                autocomplete="off"
                placeholder="Search by height, hash, kernel ID"
                onfocus="this.placeholder = ''"
                onblur="this.placeholder = 'Search by height, hash, kernel ID'"
                onfocusout="this.placeholder = 'Search by height, hash, kernel ID'"
                type="search" #searchInput (keyup.enter)="searchProcess(searchInput)" id="searchInput"/>
-        </div>
+      </div>
+      <div class="assets-button" *ngIf="isAssetsButtonVisible" (click)="assetsButtonClicked()">
+        Confidential assets
+      </div>
     </div>
 </mat-toolbar>

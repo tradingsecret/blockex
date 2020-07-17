@@ -31,6 +31,9 @@ const mobile_routes: Routes = [
   { path: 'block', component: BlockDetailsComponentMobile },
   { path: 'block-not-found', component: BlockNotFoundComponent },
   { path: 'charts/:height', component: BlockChartsComponentMobile },
+  { path: 'assets', component: AssetsListComponent },
+  { path: 'asset-details/:id', component: AssetDetailsComponent },
+  { path: 'asset-create', component: AssetCreateComponent },
   { path: '**', redirectTo: '' }
 ];
 

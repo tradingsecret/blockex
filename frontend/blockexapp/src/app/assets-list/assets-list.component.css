@@ -1,7 +1,11 @@
+
+@media(max-width: 769px) {
+
+}
+
 .assets-content {
     display: flex;
     flex-direction: column;
-
 }
 
 .assets-content-header {

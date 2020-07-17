@@ -2,7 +2,7 @@
 <app-header-mobile [class.mainnet]="isMainnet" [class.testnet]="!isMainnet"></app-header-mobile>
 <section *ngIf="!loading_block">
   <mat-card class="details-card-container">
-    <span class="mobile-label mat-column-block-header">{{block.header}}</span>
+    <span class="mobile-label-header mat-column-block-header">{{block.header}}</span>
     <mat-card-content>
       <mat-table #table [dataSource]="block.data">
 

@@ -132,6 +132,12 @@
     background-color: #e4d9ed !important;
 }
 
+.mobile-label-header {
+    margin-bottom: 10px;
+    display: inline-block;
+    font-weight: bold;
+}
+
 .mobile-label {
     width: 120px;
     display: inline-block;
@@ -177,7 +183,7 @@ mat-cell:first-of-type {
 
 app-header-mobile {
     background-attachment: fixed;
-    height: 135px;
+    /* height: 135px; */
     background-blend-mode:  normal, multiply, multiply, multiply;
     padding: 0;
     align-items: center;
