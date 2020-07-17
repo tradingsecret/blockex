@@ -125,7 +125,7 @@ export class AssetCreateComponent implements OnInit {
 
   emptyCheck() {
     this.assetCommand = './beam-wallet asset_reg --pass 1' +
-      ' -n 127.0.0.1:10000 --asset_meta "STD:' +
+      ' -n 127.0.0.1:10000 --asset_meta "STD:SCH_VER=1;' +
       (this.params.schemaVer.length > 0 ? 'SCH_VER=' + this.params.schemaVer + ';' : '') +
       (this.params.assetName.length > 0 ? 'N=' + this.params.assetName + ';' : '') +
       (this.params.assetCode.length > 0 ? 'SN=' + this.params.assetCode + ';' : '') +

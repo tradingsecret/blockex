@@ -10,7 +10,7 @@
             <div class="mandatory-values">
               <div class="mand-values-row">
                 <div class="mand-title">METADATA SCHEMA VERSION:</div>
-                <input class="mand-input" type="text" name="shemaVer" formControlName="shemaVer"
+                <input class="mand-input" disabled type="text" name="shemaVer" placeholder="1" formControlName="shemaVer"
                       (input)="schemaVerChanged(createForm.get('shemaVer'))"/>
               </div>
               <div class="mand-values-row">
@@ -105,9 +105,10 @@
     </div>
   </div>
   <div class="create-separator"></div>
-  <div class="create-see-more">To see more info please check 
+  <div class="create-see-more"> See 
     <div class="asset-descr-link" (click)="openDescriptorClicked()">
       Asset Descriptor
     </div>
+    <span><span>&nbsp;</span>for more info.</span>
   </div>
 </div>
