@@ -212,79 +212,68 @@ def update_blockchain():
         _inputs = []
         _outputs = []
         _kernels = []
-        new_values = False
-        fork_detected = False
         
         for _block in blocks:
-
             if 'found' in _block and _block['found'] is False:
                 continue
 
-            if not fork_detected and not new_values and blocks_to_check:
+            is_new_block = False
+            if blocks_to_check:
                 try:
-                    check_value = blocks_to_check.get(height=_block['height'])
-                    if check_value.hash != _block['hash']:
+                    block_to_check = blocks_to_check.get(height=_block['height'])
+                    if block_to_check.hash != _block['hash']:
                         # Fork detected
-                        fork_detected = True
                         fd = Forks_event_detection()
                         fd.from_json(_block['height'])
                         fd.save()
 
-                        Input.objects.filter(block_id=check_value.id).delete()
-                        Output.objects.filter(block_id=check_value.id).delete()
-                        Kernel.objects.filter(block_id=check_value.id).delete()
+                        Input.objects.filter(block_id=block_to_check.id).delete()
+                        Output.objects.filter(block_id=block_to_check.id).delete()
+                        Kernel.objects.filter(block_id=block_to_check.id).delete()
 
-                        check_value.delete()
+                        block_to_check.delete()
+                        is_new_block = True
 
                 except ObjectDoesNotExist:
-                    new_values = True
+                    is_new_block = True
+            else:
+                is_new_block = True
 
-            if fork_detected and not new_values and blocks_to_check:
+            if is_new_block:
+                b = Block()
+                b.from_json(_block)
+
+                fee = 0.0
+
                 try:
-                    check_value = blocks_to_check.get(height=_block['height'])
+                    b.save()
+                except IntegrityError:
+                    b = Block.objects.get(height=b.height)
+                    continue
 
-                    Input.objects.filter(block_id=check_value.id).delete()
-                    Output.objects.filter(block_id=check_value.id).delete()
-                    Kernel.objects.filter(block_id=check_value.id).delete()
+                for _input in _block['inputs']:
+                    i = Input()
+                    i.from_json(_input)
+                    i.block = b
+                    _inputs.append(i)
 
-                    check_value.delete()
-                except ObjectDoesNotExist:
-                    new_values = True
+                for _output in _block['outputs']:
+                    o = Output()
+                    o.from_json(_output)
+                    o.block = b
+                    _outputs.append(o)
 
-            b = Block()
-            b.from_json(_block)
+                for _kernel in _block['kernels']:
+                    k = Kernel()
+                    k.from_json(_kernel)
 
-            fee = 0.0
+                    fee = fee + k.fee
 
-            try:
+                    k.block = b
+                    _kernels.append(k)
+
+                b.fee = fee
                 b.save()
-            except IntegrityError:
-                b = Block.objects.get(height=b.height)
-                continue
-
-            for _input in _block['inputs']:
-                i = Input()
-                i.from_json(_input)
-                i.block = b
-                _inputs.append(i)
-
-            for _output in _block['outputs']:
-                o = Output()
-                o.from_json(_output)
-                o.block = b
-                _outputs.append(o)
-
-            for _kernel in _block['kernels']:
-                k = Kernel()
-                k.from_json(_kernel)
-
-                fee = fee + k.fee
-
-                k.block = b
-                _kernels.append(k)
-
-            b.fee = fee
-            b.save()
 
         last_height += 100
 
