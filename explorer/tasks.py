@@ -40,31 +40,33 @@ def send_message(message, chat_id):
     )
 
 def send_multi_height_report(from_value, to_value):
-    users = Bot_users.objects.all()
-    if not Rollback_reports.objects.filter(height_from=from_value, height_to=to_value).exists():
-        for user in users:
-            send_message(bytes.decode(b'\xE2\x9D\x97', 'utf8')+
-                'Rollback alert! Detected from '+
-                str(from_value)+
-                ' to '+
-                str(to_value)+
-                ' heights. Rollback depth='+
-                str(to_value-from_value+1), user.external_id)
-        reports = Rollback_reports()
-        reports.from_json({'from': from_value, 'to': to_value})
-        reports.save()
+    diff = to_value - from_value
+    if diff > 5:
+        users = Bot_users.objects.all()
+        if not Rollback_reports.objects.filter(height_from=from_value, height_to=to_value).exists():
+            for user in users:
+                send_message(bytes.decode(b'\xE2\x9D\x97', 'utf8')+
+                    'Rollback alert! Detected from '+
+                    str(from_value)+
+                    ' to '+
+                    str(to_value)+
+                    ' heights. Rollback depth='+
+                    str(to_value-from_value+1), user.external_id)
+            reports = Rollback_reports()
+            reports.from_json({'from': from_value, 'to': to_value})
+            reports.save()
 
-def send_solo_height_report(value):
-    users = Bot_users.objects.all()
-    if not Rollback_reports.objects.filter(height_from=value, height_to=value).exists():
-        for user in users:
-            send_message(bytes.decode(b'\xE2\x9D\x97', 'utf8')+
-                'Rollback alert! Detected on '+
-                str(value)+
-                ' height. Rollback depth=1', user.external_id)
-        reports = Rollback_reports()
-        reports.from_json({'from': value, 'to': value})
-        reports.save()
+# def send_solo_height_report(value):
+    # users = Bot_users.objects.all()
+    # if not Rollback_reports.objects.filter(height_from=value, height_to=value).exists():
+    #     for user in users:
+    #         send_message(bytes.decode(b'\xE2\x9D\x97', 'utf8')+
+    #             'Rollback alert! Detected on '+
+    #             str(value)+
+    #             ' height. Rollback depth=1', user.external_id)
+    #     reports = Rollback_reports()
+    #     reports.from_json({'from': value, 'to': value})
+    #     reports.save()
 
 @periodic_task(run_every=(crontab(minute='*/1')), name="bot_check", ignore_result=True)
 def bot_check():
@@ -110,21 +112,21 @@ def bot_check():
                         send_multi_height_report(r_first_height, r_tmp_height.height)
                         r_first_height = r_height.height
                     elif counter == 0:
-                        send_solo_height_report(r_tmp_height.height)
+                        # send_solo_height_report(r_tmp_height.height)
                         r_first_height = r_height.height
                     counter = 0
                 elif height_dif > 1 and is_end_of_rollbacks:
                     if counter > 0:
                         send_multi_height_report(r_first_height, r_tmp_height.height)
-                        send_solo_height_report(r_height.height)
-                    elif counter == 0:
-                        send_solo_height_report(r_tmp_height.height)
-                        send_solo_height_report(r_height.height)
+                        # send_solo_height_report(r_height.height)
+                    # elif counter == 0:
+                        # send_solo_height_report(r_tmp_height.height)
+                        # send_solo_height_report(r_height.height)
                 elif height_dif == 1 and is_end_of_rollbacks:
-                    if counter == 0:
-                        send_solo_height_report(r_tmp_height.height)
-                        send_solo_height_report(r_height.height)
-                    elif counter > 0:
+                    # if counter == 0:
+                        # send_solo_height_report(r_tmp_height.height)
+                        # send_solo_height_report(r_height.height)
+                    if counter > 0:
                         send_multi_height_report(r_first_height, r_height.height)
                 elif height_dif == 1 and not is_end_of_rollbacks:
                     if counter == 0:
