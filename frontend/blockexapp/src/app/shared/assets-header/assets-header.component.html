@@ -1,16 +1,55 @@
-<mat-toolbar class="header-toolbar" [class.mainnet]=isMainnet
-             [class.testnet]=!isMainnet color="primary">
-    <div class="header-content">
-      <img class="header-content-logo" src="assets/logo.svg" width=48 height=42 alt="">
-      <div class="logo-title-content" (click)="navigateToHomepage()">
-        <div class="logo-title-beam">BEAM</div>
-        <div class="logo-title-text">Block Explorer</div>
+<ng-container *ngIf="isFullScreen">
+  <mat-toolbar class="header-toolbar" [class.mainnet]=isMainnet
+              [class.testnet]=!isMainnet color="primary">
+      <div class="header-content">
+        <img class="header-content-logo" src="assets/logo.svg" width=48 height=42 alt="">
+        <div class="logo-title-content" (click)="navigateToHomepage()">
+          <div class="logo-title-beam">BEAM</div>
+          <div class="logo-title-text">Block Explorer</div>
+        </div>
+        <input autocomplete="off" class="search-header-input"
+              placeholder="Search by asset, description, ratio"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Search by asset, description, ratio'"
+              onfocusout="this.placeholder = 'Search by asset, description, ratio'"
+              type="search" #searchInput (keyup.enter)="searchProcess(searchInput)" id="searchInput"/>
       </div>
-      <input autocomplete="off" class="search-header-input"
-             placeholder="Search by asset, description, ratio"
-             onfocus="this.placeholder = ''"
-             onblur="this.placeholder = 'Search by asset, description, ratio'"
-             onfocusout="this.placeholder = 'Search by asset, description, ratio'"
-             type="search" #searchInput (keyup.enter)="searchProcess(searchInput)" id="searchInput"/>
-    </div>
-</mat-toolbar>
+  </mat-toolbar>
+</ng-container>
+
+<ng-container *ngIf="!isFullScreen">
+  <mat-toolbar class="header-toolbar-mobile"
+              [class.opened]="isSearchInputVisible || isAssetsButtonVisible"
+              [class.mainnet]="isMainnet"
+              [class.testnet]="!isMainnet" color="primary">
+      <div class="header-content-mobile">
+        <div class="header-content-top">
+          <div class="header-logo">
+            <img class="header-content-logo" src="assets/logo.svg" width=48 height=42 alt="">
+            <div class="logo-title-content" (click)="navigateToHomepage()">
+              <div class="logo-title-beam">BEAM</div>
+              <div class="logo-title-text">Block Explorer</div>
+            </div>
+          </div>
+          <div class="search-control"
+              [class.search]="!isSearchInputVisible"
+              [class.decline]="isSearchInputVisible"
+              (click)="searchClicked()"></div>
+          <div class="assets-control"
+              [class.accept]="!isAssetsButtonVisible"
+              [class.decline]="isAssetsButtonVisible"
+              (click)="assetsControlClicked()"></div>
+        </div>
+        <input autocomplete="off" class="search-header-input"
+              *ngIf="isSearchInputVisible"
+              placeholder="Search by asset, description, ratio"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'Search by asset, description, ratio'"
+              onfocusout="this.placeholder = 'Search by asset, description, ratio'"
+              type="search" #searchInput (keyup.enter)="searchProcess(searchInput)" id="searchInput"/>
+        <div class="assets-button" *ngIf="isAssetsButtonVisible" (click)="assetsButtonClicked()">
+          Confidential assets
+        </div>
+      </div>
+  </mat-toolbar>
+</ng-container>

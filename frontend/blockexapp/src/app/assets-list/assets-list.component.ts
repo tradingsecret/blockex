@@ -4,6 +4,7 @@ import { Router, Route } from '@angular/router';
 import { routesConsts } from '../consts';
 import { DataService } from '../services';
 import { ActivatedRoute} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-assets-list',
@@ -16,12 +17,18 @@ export class AssetsListComponent implements OnInit {
   loading_assets = true;
   count = 0;
   page = 0;
+  isFullScreen = false;
+  isMainnet = false;
+
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private router: Router) { }
+    private router: Router) {
+      this.isFullScreen = window.innerWidth > 768;
+    }
 
   ngOnInit() {
+    this.isMainnet = environment.production;
     const assetsByHeight = this.route.snapshot.queryParamMap.get('height');
 
     this.dataService.getAssetsList(assetsByHeight).subscribe((data) => {

@@ -13,8 +13,13 @@ export class AssetsHeaderComponent implements OnInit {
 
   isMainnet: boolean = false;
   isMasternet: boolean = false;
+  isSearchInputVisible: boolean = false;
+  isAssetsButtonVisible: boolean = false;
+  isFullScreen = false;
 
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router) {
+    this.isFullScreen = window.innerWidth > 768;
+  }
 
   ngOnInit() {
     this.isMasternet = environment.masternet;
@@ -23,6 +28,20 @@ export class AssetsHeaderComponent implements OnInit {
 
   navigateToHomepage() {
       this.router.navigate([routesConsts.HOME]);
+  }
+
+  assetsControlClicked() {
+    this.isAssetsButtonVisible = !this.isAssetsButtonVisible;
+    this.isSearchInputVisible = false;
+  }
+
+  searchClicked() {
+    this.isSearchInputVisible = !this.isSearchInputVisible;
+    this.isAssetsButtonVisible = false;
+  }
+
+  assetsButtonClicked() {
+    this.router.navigate([routesConsts.CONFIDENTIAL_ASSETS_LIST]);
   }
 
   searchProcess(input) {

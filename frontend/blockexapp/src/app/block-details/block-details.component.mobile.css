@@ -119,7 +119,7 @@
 }
 
 .mat-table {
-    overflow: auto;
+    overflow: hidden;
 }
 
 .searched-by-mainnet,
@@ -145,7 +145,7 @@
 }
 
 .desktop-label {
-    max-width: 220px;
+    max-width: 200px;
 }
 
 .mat-header-row {
@@ -207,6 +207,10 @@ app-header-mobile.testnet {
         linear-gradient(to left, rgba(255, 255, 255, 0.5), #d33b65),
         linear-gradient(297deg, #156fc3, rgba(255, 255, 255, 0.5)),
         radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0), rgba(21, 6, 40, 0.12));
+}
+
+mat-cell:last-of-type {
+    padding: 0;
 }
 
 

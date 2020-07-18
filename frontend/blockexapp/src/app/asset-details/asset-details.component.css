@@ -113,3 +113,25 @@
     letter-spacing: normal;
     color: #333333;
 }
+
+@media(max-width: 769px) {
+    .details-content {
+        width: 100%;
+    }
+
+    .details-data {
+        margin: 20px 20px 0 20px;
+    }
+
+    .short-label {
+        margin-left: 20px;
+    }
+
+    .data-title {
+        width: 160px;
+    }
+
+    .data-value {
+        max-width: calc(100% - 170px);
+    }
+}
