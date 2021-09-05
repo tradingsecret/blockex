@@ -25,12 +25,12 @@ import io
 import os
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
-BEAM_NODE_API = 'http://localhost:8888'
+BEAM_NODE_API = 'http://blockchain_explorer:8888'
 
 from django.http import JsonResponse
 from django.views import View
 
-_redis = redis.Redis(host='localhost', port=6379, db=0)
+_redis = redis.Redis(host='blockchain_redis', port=6379, db=0)
 
 class BlockViewSet(viewsets.ModelViewSet):
     queryset = Block.objects.all().order_by('-height')

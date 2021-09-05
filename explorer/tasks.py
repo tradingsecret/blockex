@@ -24,7 +24,7 @@ from pycoingecko import CoinGeckoAPI
 from django.db.models import Max
 
 HEIGHT_STEP = 43800
-BEAM_NODE_API = 'http://localhost:8888'
+BEAM_NODE_API = 'http://blockchain_explorer:8888'
 BLOCKS_PER_DAY = 1440
 BLOCKS_STEP = 100
 MONTHS_IN_YEAR = 12
@@ -32,7 +32,7 @@ FIRST_YEAR_VALUE = 20
 REST_YEARS_VALUE = 10
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
-_redis = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+_redis = redis.Redis(host='blockchain_redis', port=6379, db=0, decode_responses=True)
 
 def load_token():
     settings_dir = os.path.dirname(__file__)

@@ -15,10 +15,10 @@ const RATIO_MAX = Math.pow(2, 128) - 2;
     trigger('fadeInOut', [
       transition(':enter', [
         style({opacity:0}),
-        animate(400, style({opacity:1})) 
+        animate(400, style({opacity:1}))
       ]),
       transition(':leave', [
-        animate(400, style({opacity:0})) 
+        animate(400, style({opacity:0}))
       ])
     ])
   ]
@@ -113,8 +113,8 @@ export class AssetCreateComponent implements OnInit {
 
   emptyCheck() {
     const formItems = this.createForm.value;
-    this.assetCommand = (this.switcherSelectedValue === this.switcherValues.LIN ? './' : '') + 
-      'beam-wallet asset_reg --pass 1 -n 127.0.0.1:10000 --asset_meta "STD:' + 
+    this.assetCommand = (this.switcherSelectedValue === this.switcherValues.LIN ? './' : '') +
+      'beam-wallet asset_reg --pass 1 -n blockchain_master_node:10000 --asset_meta "STD:' +
       this.getCommand() + '" --fee 100000 --enable_assets';
     this.isEmpty = !(formItems.assetName || formItems.assetCode ||
       formItems.assetUnitName || formItems.smallestUnitName ||
