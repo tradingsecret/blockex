@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   masternet: false,
-  apiBaseUrl: "http://127.0.0.1:8000",
+  apiBaseUrl: "http://23.88.54.192:8000",
   updating: false
 };
 
