@@ -7,7 +7,7 @@ from asgiref.sync import async_to_sync
 from rest_framework.parsers import JSONParser
 import io
 import redis
-_redis = redis.Redis(host='localhost', port=6379, db=0)
+_redis = redis.Redis(host='blockchain_redis', port=6379, db=0)
 
 class ChatConsumer(WebsocketConsumer):
 

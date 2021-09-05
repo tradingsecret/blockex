@@ -20,7 +20,7 @@ from .models import *
 from datetime import datetime, timedelta
 
 HEIGHT_STEP = 43800
-BEAM_NODE_API = 'http://localhost:8888'
+BEAM_NODE_API = 'http://blockchain_explorer:8888'
 BLOCKS_PER_DAY = 1440
 BLOCKS_STEP = 100
 MONTHS_IN_YEAR = 12
@@ -28,7 +28,7 @@ FIRST_YEAR_VALUE = 20
 REST_YEARS_VALUE = 10
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
-_redis = redis.Redis(host='localhost', port=6379, db=0)
+_redis = redis.Redis(host='blockchain_redis', port=6379, db=0)
 
 def load_token():
     settings_dir = os.path.dirname(__file__)
@@ -314,7 +314,7 @@ def update_blockchain():
 
 @periodic_task(run_every=(crontab(minute=0, hour="*/1")), name="update_charts", ignore_result=True)
 def update_charts():
-    _redis = redis.Redis(host='localhost', port=6379, db=0)
+    _redis = redis.Redis(host='blockchain_redis', port=6379, db=0)
 
     latest_block = Block.objects.latest('height')
     latest_block_height = int(latest_block.height)
