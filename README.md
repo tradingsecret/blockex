@@ -130,6 +130,13 @@ To reload nginx after config init or change `sudo systemctl restart nginx`
 
 You are done with the backend!!!
 
+
+## Run tasks manually.
+```
+    from explorer.tasks import *         
+    update_notification()
+```
+
 # Explorer API documentation 
 
 ### schemes: 
