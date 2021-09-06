@@ -133,6 +133,8 @@ You are done with the backend!!!
 
 ## Run tasks manually.
 ```
+    source ~/venvs/blockex/bin/activate
+    python3 manage.py shell
     from explorer.tasks import *         
     update_notification()
 ```
