@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   //wsEndpoint: 'wss://masternet-explorer.beam.mw/ws/explorer/',
-  wsEndpoint: 'wss://23.88.54.192:8000/ws/explorer/',
+  wsEndpoint: 'ws://23.88.54.192:8000/ws/explorer/',
   reconnectInterval: 2000,
   //apiBaseUrl: 'https://masternet-explorer.beam.mw',
   apiBaseUrl: 'http://23.88.54.192:8000',

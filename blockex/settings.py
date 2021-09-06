@@ -112,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # CHANNELS
 ASGI_APPLICATION = "blockex.routing.application"
+
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels.layers.InMemoryChannelLayer"
