@@ -134,15 +134,10 @@ CELERY_RESULT_BACKEND = 'redis://blockchain_redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Africa/Nairobi'
+CELERY_TIMEZONE = 'UTC'
 CELERYBEAT_SCHEDULE  = {
     'automatic_update_notification': {
         'task': 'update_notification',
-        'schedule': crontab(minute='*/1'),
-        'args': None
-    },
-    'automatic_bot_check': {
-       'task': 'bot_check',
         'schedule': crontab(minute='*/1'),
         'args': None
     },
