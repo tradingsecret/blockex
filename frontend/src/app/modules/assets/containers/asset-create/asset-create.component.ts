@@ -114,7 +114,7 @@ export class AssetCreateComponent implements OnInit {
   emptyCheck() {
     const formItems = this.createForm.value;
     this.assetCommand = (this.switcherSelectedValue === this.switcherValues.LIN ? './' : '') +
-      'beam-wallet asset_reg --pass 1 -n blockchain_master_node:10000 --asset_meta "STD:' +
+      'beam-wallet asset_reg --pass 1 -n 23.88.54.192:10000 --asset_meta "STD:' +
       this.getCommand() + '" --fee 100000 --enable_assets';
     this.isEmpty = !(formItems.assetName || formItems.assetCode ||
       formItems.assetUnitName || formItems.smallestUnitName ||
