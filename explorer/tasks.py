@@ -29,7 +29,7 @@ BEAM_NODE_API = 'http://blockchain_explorer:8888'
 BLOCKS_PER_DAY = 650
 BLOCKS_STEP = 100
 MONTHS_IN_YEAR = 12
-FIRST_YEAR_VALUE = 19770
+FIRST_YEAR_VALUE = 20
 REST_YEARS_VALUE = 10
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
