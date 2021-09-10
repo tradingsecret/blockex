@@ -23,10 +23,9 @@ from django.utils import timezone
 from pycoingecko import CoinGeckoAPI
 from django.db.models import Max
 
-HEIGHT_STEP = 15208
+HEIGHT_STEP = 39541
 BEAM_NODE_API = 'http://blockchain_explorer:8888'
-#BLOCKS_PER_DAY = 1440
-BLOCKS_PER_DAY = 500
+BLOCKS_PER_DAY = 1300
 BLOCKS_STEP = 100
 MONTHS_IN_YEAR = 12
 FIRST_YEAR_VALUE = 20
