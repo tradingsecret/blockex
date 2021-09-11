@@ -135,7 +135,8 @@ You are done with the backend!!!
 ```
     source ~/venvs/blockex/bin/activate
     python3 manage.py shell
-    from explorer.tasks import *         
+    from explorer.tasks import *
+    update_blockchain()
     update_notification()
 ```
 
