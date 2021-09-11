@@ -26,7 +26,7 @@ from django.db.models import Max
 
 HEIGHT_STEP = 14600
 BEAM_NODE_API = 'http://blockchain_explorer:8888'
-BLOCKS_PER_DAY = 550
+BLOCKS_PER_DAY = 480
 BLOCKS_STEP = 100
 MONTHS_IN_YEAR = 12
 FIRST_YEAR_VALUE = 20
