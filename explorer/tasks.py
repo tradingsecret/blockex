@@ -260,7 +260,7 @@ def update_blockchain():
     total_coins_emission = _redis.get('total_coins_emission')
 
     if not total_coins_emission:
-        total_coins_emission = HEIGHT_STEP * 120 * 100
+        total_coins_emission = HEIGHT_STEP * 60 * 100
         _redis.set('total_coins_emission', total_coins_emission)
 
     # Next treasury emission block height
@@ -309,9 +309,6 @@ def update_blockchain():
             blocks_to_check = Block.objects.filter(height__gte=str(from_height), height__lt=str(last_height))
 
         r = requests.get(BEAM_NODE_API + '/blocks?height=' + str(from_height) + '&n=' + str(n))
-
-        pprint(BEAM_NODE_API + '/blocks?height=' + str(from_height) + '&n=' + str(n))
-        pprint(r.text)
 
         blocks = r.json()
         _inputs = []
@@ -457,7 +454,7 @@ def update_charts():
             if dif_avg_value:
                 diff = dif_avg_value
             if diff:
-                hashrate = diff / 120
+                hashrate = diff / 60
             fee_sum_value = offset_blocks.aggregate(Sum('fee'))['fee__sum']
             if fee_sum_value:
                 fee = fee_sum_value
