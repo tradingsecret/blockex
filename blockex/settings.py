@@ -26,7 +26,10 @@ SECRET_KEY = '7yl&$nvh*d5e(+)6odu-@9$0)%%%hx-#&d101x!)w9!q&9@)bg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -53,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blockex.middleware.corsMiddleware',
 ]
 
 ROOT_URLCONF = 'blockex.urls'

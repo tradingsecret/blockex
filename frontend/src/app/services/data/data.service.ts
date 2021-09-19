@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Subject } from 'rxjs';
 
@@ -35,24 +35,33 @@ export class DataService {
   }
 
   loadBlocks(page = 1): any {
-    return this.http.get<Block[]>(this.API_BASE + '/explorer/blocks/' + '?page=' + (page + 1));
+    return this.http.get<Block[]>(this.API_BASE + '/explorer/blocks/' + '?page=' + (page + 1), this.getQueryOptions());
   }
 
   loadOffers(page = 1): any {
-    return this.http.get<Offer[]>(this.API_BASE + '/explorer/get_swap_offers/?page=' + (page + 1));
+    return this.http.get<Offer[]>(this.API_BASE + '/explorer/get_swap_offers/?page=' + (page + 1), this.getQueryOptions());
   }
 
   searchBlock(query) {
-    return this.http.get<any>(this.API_BASE + '/explorer/search/' + '?q=' + query);
+    return this.http.get<any>(this.API_BASE + '/explorer/search/' + '?q=' + query, this.getQueryOptions());
   }
 
   loadBlock(hash) {
-    return this.http.get<Block>(this.API_BASE + '/explorer/block/' + '?hash=' + hash);
+    return this.http.get<Block>(this.API_BASE + '/explorer/block/' + '?hash=' + hash, this.getQueryOptions());
   }
 
   getAssetsList(height = null) {
     const heightParam = (height !== null) ? '?height=' + height : '';
-    return this.http.get<{assets: Asset[]}>(this.API_BASE + '/explorer/get_assets_list/' + heightParam);
+    return this.http.get<{assets: Asset[]}>(this.API_BASE + '/explorer/get_assets_list/' + heightParam, this.getQueryOptions());
+  }
+
+  private getQueryOptions() {
+      return {
+          withCredentials: true,
+          /*headers: new HttpHeaders({
+            'Access-Control-Allow-Origin':  '*',
+          })*/
+      };
   }
 
   loadAssets(data) {
@@ -72,7 +81,7 @@ export class DataService {
       const faviconUrlIndex = metadata.indexOf(PARAMS.FAVICON_URL);
       const logoUrlIndex = metadata.indexOf(PARAMS.LOGO_URL);
       const colorIndex = metadata.indexOf(PARAMS.COLOR);
-      let pdfLinkFromTo = metadata.indexOf(SEPARATOR, pdfUrlIndex);
+      const pdfLinkFromTo = metadata.indexOf(SEPARATOR, pdfUrlIndex);
       const assetItem = {
           lock_height: item.lock_height,
           value: item.value_lo,

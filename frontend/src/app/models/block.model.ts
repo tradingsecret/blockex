@@ -1,7 +1,7 @@
-import {Deserializable} from "./deserializable.model";
+import {Deserializable} from './deserializable.model';
 
 export class Block implements Deserializable {
-  height:number;
+  height: number;
   difficulty: number;
   hash: string;
   subsidy: number;
@@ -12,6 +12,7 @@ export class Block implements Deserializable {
   inputs: any;
   kernels: any;
 
+  // tslint:disable-next-line:typedef
   deserialize(input: any) {
     Object.assign(this, input);
     return this;
