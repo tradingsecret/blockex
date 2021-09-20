@@ -34,7 +34,7 @@ const routes: Routes = [{
             path: '', component: BlockDetailsComponent
         }
     ]
-  }]
+  }, ]
 }];
 
 @NgModule({

@@ -1,4 +1,4 @@
-@mixin top-background-color {
+/*@mixin top-background-color {
   background-attachment: fixed;
   background-blend-mode: normal, multiply, multiply, multiply;
   background-image:
@@ -7,7 +7,7 @@
     linear-gradient(to left, rgba(255, 255, 255, 0.5), #d33b65),
     linear-gradient(297deg, #156fc3, rgba(255, 255, 255, 0.5)),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0), rgba(21, 6, 40, 0.12));
-}
+}*/
 
 @mixin switcher-selector-color {
   box-shadow: 0 2px 7px 0 #00163a;
@@ -49,7 +49,7 @@
     height: 111px;
 
     &__content {
-        @include top-background-color();
+        //@include top-background-color();
         padding: 0 140px;
         width: 100%;
         display: flex;
@@ -87,7 +87,7 @@
     min-width: 0;
 
     &__content {
-        @include top-background-color();
+        //@include top-background-color();
         padding: 16px;
         width: 100%;
         display: flex;

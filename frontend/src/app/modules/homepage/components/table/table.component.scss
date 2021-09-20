@@ -49,7 +49,7 @@
 
 .paginator-wrapper,
 .mat-header-row {
-    @include paginator-wrapper-background();
+    // @include paginator-wrapper-background();
 }
 
 .paginator-wrapper {
@@ -59,7 +59,8 @@
 }
 
 .paginator {
-    background-color: rgba(255, 255, 255, 0);
+    // background-color: rgba(255, 255, 255, 0);
+    background-color: inherit;
 }
 
 .paginator-wrapper.mobile,
@@ -138,7 +139,7 @@
             margin-top: 8px;
             height: 2px;
             box-shadow: 0 0 5px 0 rgba(0, 246, 210, 0.7);
-            background-color: #00f6d2;
+            // background-color: #00f6d2;
         }
     }
 }
@@ -186,6 +187,7 @@
     line-height: normal;
     letter-spacing: normal;
     color: #333333;
+    background-color: inherit;
 }
 
 .blocks-table-row {
@@ -208,7 +210,7 @@
 }
 
 .mat-row:nth-child(odd){
-    background-color: rgb(251,251,251);
+    // background-color: rgb(251,251,251);
 }
 
 .mat-row::after {
@@ -237,7 +239,7 @@
 }
 
 .offers-table-row:nth-child(odd){
-    background-color: rgb(251,251,251);
+    // background-color: rgb(251,251,251);
 }
 
 .coins-cell {

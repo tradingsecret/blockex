@@ -2,8 +2,8 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DataService } from '../../../../services';
 import { Router, NavigationEnd} from '@angular/router';
-import { routesConsts } from "../../../../consts";
-import {environment} from "../../../../../environments/environment";
+import { routesConsts } from '../../../../consts';
+import {environment} from '../../../../../environments/environment';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
@@ -15,13 +15,14 @@ export class BlockDetailsComponent implements OnInit {
   @ViewChild('kernel') public kernel: ElementRef;
 
   block: any;
-  loading_block: boolean = false;
-  notFound: boolean = false;
-  isMainnet: boolean = false;
+  // tslint:disable-next-line:variable-name
+  loading_block = false;
+  notFound = false;
+  isMainnet = false;
   searchedBy = '';
   isFadein = true;
 
-  kernelsExpanded: boolean = false;
+  kernelsExpanded = false;
 
   displayedColumns: any = {
     kernels: ['fee', 'id', 'extra'],
@@ -34,7 +35,7 @@ export class BlockDetailsComponent implements OnInit {
   constructor(
       private router: Router,
       private deviceService: DeviceDetectorService,
-      private dataService: DataService, 
+      private dataService: DataService,
       private route: ActivatedRoute) {
     route.queryParams.subscribe(params => {
       if (params.searched_by !== undefined) {
@@ -47,13 +48,13 @@ export class BlockDetailsComponent implements OnInit {
       }
       setTimeout(() => {
           let element = null;
-          if(this.searchedBy.length > 0) {
-            element = document.querySelector("[id='"+this.searchedBy+"']");
+          if (this.searchedBy.length > 0) {
+            element = document.querySelector('[id=\'' + this.searchedBy + '\']');
           }
           if (element) {
             element.scrollIntoView({behavior: 'smooth'});
           }
-        }, 300)
+        }, 300);
     });
   }
 
@@ -71,7 +72,7 @@ export class BlockDetailsComponent implements OnInit {
       {name: 'DIFFICULTY:', value: blockItem.difficulty.toLocaleString(), additional: ''},
       {name: 'SUBSIDY:', value: blockItem.subsidy.toLocaleString(), additional: 'Groth'},
       {name: 'CHAINWORK:', value: blockItem.chainwork, additional: ''},
-      {name: 'AGE:', value: new Date(blockItem.timestamp).toLocaleDateString("en-US", {
+      {name: 'AGE:', value: new Date(blockItem.timestamp).toLocaleDateString('en-US', {
         year: 'numeric', month: 'long',
         day: 'numeric', hour: 'numeric',
         minute: 'numeric', second: 'numeric' }), additional: ''}
@@ -91,18 +92,18 @@ export class BlockDetailsComponent implements OnInit {
 
     setTimeout(() => {
       let element = null;
-      if(this.searchedBy.length > 0) {
-        element = document.querySelector("[id='"+this.searchedBy+"']");
+      if (this.searchedBy.length > 0) {
+        element = document.querySelector('[id=\'' + this.searchedBy + '\']');
       }
       if (element) {
         element.scrollIntoView({behavior: 'smooth'});
       }
-    }, 300)
+    }, 300);
   }
 
   ngOnInit() {
     let searchedItem = this.route.snapshot.queryParamMap.get('searched_by');
-    let kernel_id = this.route.snapshot.queryParamMap.get('kernel_id');
+    const kernel_id = this.route.snapshot.queryParamMap.get('kernel_id');
     if (kernel_id) {
       searchedItem = kernel_id;
       this.dataService.searchBlock(kernel_id).subscribe((blockItem) => {

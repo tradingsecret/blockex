@@ -4,20 +4,27 @@
     cursor: pointer;
 
     &__title {
+        ::before {
+          font-family: boxicons;
+          content: "\e9d0";
+          margin-top: 10px;
+          font-size: 23px;
+        }
+
         margin-left: 25px;
         display: flex;
         flex-direction: column;
 
-        &__beam {
-            color: #25c1ff;
-            font-weight: bolder;
+        &__imperium {
+            color: #ffffff;;
             text-shadow: 1px 0 #25c1ff;
-            letter-spacing: 12px;
-            font-size: 17px;
+            font-weight: bold;
+            line-height: 1.2;
             font-style: normal;
             font-stretch: normal;
-            line-height: normal;
             overflow: hidden;
+            font-size: 30px;
+            letter-spacing: 2px;
         }
 
         &__text {
@@ -25,18 +32,5 @@
             color: #ffffff;
             font-size: 13px;
         }
-    }
-}
-
-.logo-x {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-
-    &__title {
-        color: #ffffff;
-        font-size: 13px;
-        margin-top: 5px;
-        text-align: center;
     }
 }

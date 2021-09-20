@@ -4,10 +4,10 @@
 
 export const environment = {
   production: true,
-  //wsEndpoint: 'wss://masternet-explorer.beam.mw/ws/explorer/',
+  // wsEndpoint: 'wss://masternet-explorer.beam.mw/ws/explorer/',
   wsEndpoint: 'ws://23.88.54.192/ws/explorer/',
   reconnectInterval: 2000,
-  //apiBaseUrl: 'https://masternet-explorer.beam.mw',
+  // apiBaseUrl: 'https://masternet-explorer.beam.mw',
   apiBaseUrl: 'http://23.88.54.192',
   envTitle: 'masternet'
 };
