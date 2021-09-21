@@ -36,10 +36,9 @@ export class GraphsComponent implements OnInit, OnDestroy {
   public graphsLoaded = false;
   public graphs = {
     blocks: null,
-    fee: null,
-    swaps: null,
-    lelantus: null,
-    transactions: null 
+    blocks1: null,
+    transactions: null,
+    transactions1: null
   };
   public blockCharts = [
     {
@@ -100,17 +99,17 @@ export class GraphsComponent implements OnInit, OnDestroy {
   tooltipFormatter = function() {
     const date = new Date(this.x);
     let maximumFractionDigits = 0;
-    if (this.series.name === 'BTC' || 
-      this.series.name === 'LTC' || 
+    if (this.series.name === 'BTC' ||
+      this.series.name === 'LTC' ||
       this.series.name === 'DOGE' ||
       this.series.name === 'DASH' ||
       this.series.name === 'WBTC' ||
       this.series.name === 'USDT' ||
       this.series.name === 'ETH' ||
-      this.series.name === 'DAI' || 
+      this.series.name === 'DAI' ||
       this.series.name === 'QTUM') {
         maximumFractionDigits = 8;
-    } 
+    }
     return '<div class="chart-tooltip-container">' +
       '<span class="tooltip-line-color">\u2015\u2015</span>' +
       '<div class="tooltip-line-circle"></div>' +
@@ -119,7 +118,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
           new Intl.DateTimeFormat('en-US', {month: 'long'}).format(date) + ' ' +
           date.getFullYear() + ', ' + (date.getHours() < 10 ? '0' : '') + date.getHours()
           + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()  + '</div>' +
-      '<div class="tooltip-value">' + this.y.toLocaleString('en-US', {maximumFractionDigits: maximumFractionDigits}) + '</div></div>';
+      '<div class="tooltip-value">' + this.y.toLocaleString('en-US', {maximumFractionDigits}) + '</div></div>';
   };
 
   xAxisFormatter = function() {
@@ -142,7 +141,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
             shortValue = parseFloat((suffixNum !== 0
               ? (this.value / Math.pow(1000, suffixNum))
               : this.value).toPrecision(precision));
-            const dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+            const dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
             if (dotLessShortValue.length <= 2) { break; }
         }
         if (shortValue % 1 !== 0) {
@@ -176,14 +175,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         }
       },
       yAxis: [{
-        lineColor: '#ff51ff',
-        title: {
-          text: this.isMobile ? '' : 'Blocks per hour',
-          margin: 24
-        }
-      }, {
         min: 0,
-        opposite: true,
         title: {
           rotation: 270,
           text: this.isMobile ? '' : 'Average difficulty',
@@ -223,116 +215,14 @@ export class GraphsComponent implements OnInit, OnDestroy {
           radius: 2,
           symbol: 'circle',
         },
-        name: 'Blocks per hour',
-        data: graphs.blocks
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          radius: 2,
-          symbol: 'circle',
-        },
         name: 'Average difficulty',
         data: graphs.difficulty,
-        yAxis: 1
-      }, {
-        type: 'line',
-        marker: {
-          symbol: 'circle',
-          radius: 2,
-          enabled: false
-        },
-        lineWidth: 1,
-        name: 'Fixed 60 blocks',
-        data: graphs.fixed
-      }, {
-        type: 'line',
-        marker: {
-          symbol: 'circle',
-          radius: 2,
-          enabled: false
-        },
-        lineWidth: 1,
-        name: 'Average blocks',
-        data: graphs.averageBlocks
+        yAxis: 0
       }],
     });
 
-    this.graphs.fee = new Chart({
-      chart: {
-        shadow: false,
-        styledMode: true,
-        height: this.isMobile ? 420 : 430,
-        marginBottom: 100,
-        type: 'line',
-      },
-      title: {
-        text: ''
-      },
-      credits: {
-          enabled: false
-      },
-      exporting: {
-        buttons: {
-          contextButton: {
-              enabled: false
-          }
-        }
-      },
-      yAxis: {
-        lineWidth: 0,
-        type: 'logarithmic',
-        title: {
-          text: this.isMobile ? '' : 'Transaction Fee, GROTH',
-          margin: 34,
-        },
-        labels: {
-          formatter: this.feeYAxisFormatter,
-        }
-      },
-      xAxis: {
-        lineWidth: 0,
-        minorGridLineWidth: 0,
-        lineColor: 'transparent',
-        minorTickLength: 0,
-        tickLength: 0,
-        type: 'datetime',
-        minTickInterval: DAY_TICK,
-        labels: {
-          formatter: this.xAxisFormatter,
-        }
-      },
-      legend: {
-        width: 300,
-        itemWidth: 150,
-        itemMarginBottom: 10,
-        layout: 'horizontal',
-        align: 'center',
-        verticalAlign: 'bottom',
-        x: this.isMobile ? 10 : -10,
-        y: -15
-      },
-      tooltip: {
-        followPointer: false,
-        useHTML:true,
-        borderRadius: 10,
-        borderWidth: 0,
-        shadow: false,
-        formatter: this.tooltipFormatter
-      },
-      series: [{
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          radius: 2,
-          symbol: 'circle'
-        },
-        name: 'Fee',
-        data: graphs.fee,
-      }],
-    });
 
-    this.graphs.swaps = new Chart({
+    this.graphs.blocks1 = new Chart({
       title: {
         text: '',
       },
@@ -344,159 +234,21 @@ export class GraphsComponent implements OnInit, OnDestroy {
         styledMode: true
       },
       credits: {
-          enabled: false
+        enabled: false
       },
       exporting: {
         buttons: {
           contextButton: {
-              enabled: false
+            enabled: false
           }
         }
       },
       yAxis: [{
         title: {
-          text: this.isMobile ? '' : 'Amount, USD',
+          text: this.isMobile ? '' : 'Blocks per hour',
           margin: 24
         }
-      }],
-      xAxis: {
-        minorTickLength: 0,
-        tickLength: 0,
-        type: 'datetime',
-        minTickInterval: DAY_TICK,
-        labels: {
-          formatter: this.xAxisFormatter,
-        }
-      },
-      legend: {
-        width: this.isMobile ? 380 : 450,
-        itemWidth: this.isMobile ? 190 : 90,
-        itemMarginBottom: 12,
-        layout: 'horizontal',
-        align: 'center',
-        verticalAlign: 'bottom',
-        x: this.isMobile ? 40 : 0,
-        y: 10
-      },
-      tooltip: {
-        followPointer: false,
-        useHTML: true,
-        borderRadius: 20,
-        shadow: false,
-        formatter: this.tooltipFormatter
-      },
-      series: [{
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          radius: 2,
-          symbol: 'circle',
-        },
-        name: 'BTC',
-        data: graphs.swaps_btc_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          radius: 2,
-          symbol: 'circle',
-        },
-        name: 'DASH',
-        data: graphs.swaps_dash_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'DOGE',
-        data: graphs.swaps_doge_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'LTC',
-        data: graphs.swaps_ltc_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'QTUM',
-        data: graphs.swaps_qtum_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'WBTC',
-        data: graphs.swaps_wbtc_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'ETH',
-        data: graphs.swaps_eth_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'USDT',
-        data: graphs.swaps_usdt_usd
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          symbol: 'circle',
-          radius: 2,
-        },
-        name: 'DAI',
-        data: graphs.swaps_dai_usd
-      }],
-    });
-
-    this.graphs.lelantus = new Chart({
-      title: {
-        text: '',
-      },
-      chart: {
-        shadow: false,
-        height: this.isMobile ? 420 : 430,
-        ignoreHiddenSeries: false,
-        type: 'line',
-        styledMode: true
-      },
-      credits: {
-          enabled: false
-      },
-      exporting: {
-        buttons: {
-          contextButton: {
-              enabled: false
-          }
-        }
-      },
-      yAxis: [{
-        lineColor: '#ff51ff',
-        title: {
-          text: this.isMobile ? '' : 'Time, Hours',
-          margin: 24
-        }
-      }],
+      }, ],
       xAxis: {
         minorTickLength: 0,
         tickLength: 0,
@@ -530,12 +282,77 @@ export class GraphsComponent implements OnInit, OnDestroy {
           radius: 2,
           symbol: 'circle',
         },
-        name: 'Average time',
-        data: graphs.lelantus
+        name: 'Blocks per hour',
+        data: graphs.blocks
       }],
     });
 
     this.graphs.transactions = new Chart({
+      title: {
+        text: '',
+      },
+      chart: {
+        shadow: false,
+        height: this.isMobile ? 420 : 430,
+        ignoreHiddenSeries: false,
+        type: 'line',
+        styledMode: true,
+      },
+      credits: {
+          enabled: false
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+              enabled: false
+          }
+        }
+      },
+      yAxis: [{
+        lineColor: '#ff51ff',
+        title: {
+          text: this.isMobile ? '' : 'Regular transactions amount',
+          margin: 24
+        },
+      }],
+      xAxis: {
+        minorTickLength: 0,
+        tickLength: 0,
+        type: 'datetime',
+        minTickInterval: DAY_TICK,
+        labels: {
+          formatter: this.xAxisFormatter,
+        },
+      },
+      legend: {
+        width: 450,
+        itemWidth: 90,
+        layout: 'horizontal',
+        align: 'center',
+        verticalAlign: 'bottom',
+        x: this.isMobile ? 40 : 0,
+        y: 10,
+      },
+      tooltip: {
+        followPointer: false,
+        useHTML: true,
+        borderRadius: 20,
+        shadow: false,
+        formatter: this.tooltipFormatter
+      },
+      series: [{
+        type: 'line',
+        marker: {
+          enabledThreshold: 0,
+          radius: 2,
+          symbol: 'circle',
+        },
+        name: 'Regular',
+        data: graphs.transactions
+      }, ],
+    });
+
+    this.graphs.transactions1 = new Chart({
       title: {
         text: '',
       },
@@ -558,7 +375,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       yAxis: [{
         title: {
-          text: this.isMobile ? '' : 'Transactions amount',
+          text: this.isMobile ? '' : 'Shielded transactions amount',
           margin: 24
         }
       }],
@@ -594,15 +411,6 @@ export class GraphsComponent implements OnInit, OnDestroy {
           radius: 2,
           symbol: 'circle',
         },
-        name: 'Regular',
-        data: graphs.transactions
-      }, {
-        type: 'line',
-        marker: {
-          enabledThreshold: 0,
-          radius: 2,
-          symbol: 'circle',
-        },
         name: 'Shielded',
         data: graphs.lelantus_trs
       }],
@@ -610,7 +418,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
   }
 
   formatDateForGraph(date) {
-    return new Date(date.replace(' ', 'T')).getTime()
+    return new Date(date.replace(' ', 'T')).getTime();
   }
 
   constructGraphsData(data) {
@@ -652,17 +460,17 @@ export class GraphsComponent implements OnInit, OnDestroy {
       graphsData.fixed.push([dateValue, 60]);
       graphsData.hashrate.push([dateValue, element.hashrate]);
       graphsData.averageBlocks.push([dateValue, data.avg_blocks]);
-      graphsData.transactions.push([dateValue, element.transactions.kernels__count])
+      graphsData.transactions.push([dateValue, element.transactions.kernels__count]);
     });
 
     data.lelantus.forEach(element => {
       const dateValue = this.formatDateForGraph(element[0]);
-      graphsData.lelantus.push([dateValue, parseFloat(element[1])])
+      graphsData.lelantus.push([dateValue, parseFloat(element[1])]);
     });
 
     data.lelantus_trs.forEach(element => {
       const dateValue = this.formatDateForGraph(element[0]);
-      graphsData.lelantus_trs.push([dateValue, parseFloat(element[1])])
+      graphsData.lelantus_trs.push([dateValue, parseFloat(element[1])]);
     });
 
     data.swap_stats.forEach(element => {
@@ -697,54 +505,19 @@ export class GraphsComponent implements OnInit, OnDestroy {
       const graphsConstructed = this.constructGraphsData(data);
       if (this.graphsLoaded) {
         this.graphs.blocks.ref$.subscribe((blockChart) => {
+          blockChart.series[0].setData(graphsConstructed.difficulty);
+        });
+        this.graphs.blocks1.ref$.subscribe((blockChart) => {
           blockChart.series[0].setData(graphsConstructed.blocks);
-          if (this.selectedBlocksChartType.num == this.blockCharts[0].num) {
-            blockChart.series[1].setData(graphsConstructed.difficulty);
-          } else {
-            blockChart.series[1].setData(graphsConstructed.hashrate);
-          }
-          blockChart.series[2].setData(graphsConstructed.fixed);
-          blockChart.series[3].setData(graphsConstructed.averageBlocks);
-        });
-
-        this.graphs.fee.ref$.subscribe((feeChart) => {
-          feeChart.series[0].setData(graphsConstructed.fee);
-        });
-
-        this.graphs.lelantus.ref$.subscribe((lelChart) => {
-          lelChart.series[0].setData(graphsConstructed.lelantus);
         });
 
         this.graphs.transactions.ref$.subscribe((trChart) => {
           trChart.series[0].setData(graphsConstructed.transactions);
-          trChart.series[1].setData(graphsConstructed.lelantus_trs);
         });
 
-        if (this.activeCurrency === currencies.BTC) {
-          this.graphs.swaps.ref$.subscribe((swapsChart) => {
-            swapsChart.series[0].setData(graphsConstructed.swaps_btc_btc);
-            swapsChart.series[1].setData(graphsConstructed.swaps_dash_btc);
-            swapsChart.series[2].setData(graphsConstructed.swaps_doge_btc);
-            swapsChart.series[3].setData(graphsConstructed.swaps_ltc_btc);
-            swapsChart.series[4].setData(graphsConstructed.swaps_qtum_btc);
-            swapsChart.series[5].setData(graphsConstructed.swaps_wbtc_btc);
-            swapsChart.series[6].setData(graphsConstructed.swaps_eth_btc);
-            swapsChart.series[7].setData(graphsConstructed.swaps_usdt_btc);
-            swapsChart.series[8].setData(graphsConstructed.swaps_dai_btc);
-          });
-        } else if (this.activeCurrency === currencies.USD) {
-          this.graphs.swaps.ref$.subscribe((swapsChart) => {
-            swapsChart.series[0].setData(graphsConstructed.swaps_btc_usd);
-            swapsChart.series[1].setData(graphsConstructed.swaps_dash_usd);
-            swapsChart.series[2].setData(graphsConstructed.swaps_doge_usd);
-            swapsChart.series[3].setData(graphsConstructed.swaps_ltc_usd);
-            swapsChart.series[4].setData(graphsConstructed.swaps_qtum_usd);
-            swapsChart.series[5].setData(graphsConstructed.swaps_wbtc_usd);
-            swapsChart.series[6].setData(graphsConstructed.swaps_eth_usd);
-            swapsChart.series[7].setData(graphsConstructed.swaps_usdt_usd);
-            swapsChart.series[8].setData(graphsConstructed.swaps_dai_usd);
-          });
-        }
+        this.graphs.transactions1.ref$.subscribe((trChart) => {
+          trChart.series[0].setData(graphsConstructed.lelantus_trs);
+        });
       } else {
         this.graphsInit(graphsConstructed);
         this.graphsLoaded = true;
@@ -758,26 +531,26 @@ export class GraphsComponent implements OnInit, OnDestroy {
   }
 
   swapChartUpdate(swapsChart, state) {
-    swapsChart.series[0].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[0].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_btc_btc : this.lastConstructedGraphs.swaps_btc_usd);
-    swapsChart.series[1].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[1].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_dash_btc : this.lastConstructedGraphs.swaps_dash_usd);
-    swapsChart.series[2].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[2].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_doge_btc : this.lastConstructedGraphs.swaps_doge_usd);
-    swapsChart.series[3].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[3].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_ltc_btc : this.lastConstructedGraphs.swaps_ltc_usd);
-    swapsChart.series[4].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[4].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_qtum_btc : this.lastConstructedGraphs.swaps_qtum_usd);
-    swapsChart.series[5].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[5].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_wbtc_btc : this.lastConstructedGraphs.swaps_wbtc_usd);
-    swapsChart.series[6].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[6].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_eth_btc : this.lastConstructedGraphs.swaps_eth_usd);
-    swapsChart.series[7].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[7].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_usdt_btc : this.lastConstructedGraphs.swaps_usdt_usd);
-    swapsChart.series[8].setData(state === this.swapChartStates.BTC ? 
+    swapsChart.series[8].setData(state === this.swapChartStates.BTC ?
       this.lastConstructedGraphs.swaps_dai_btc : this.lastConstructedGraphs.swaps_dai_usd);
     swapsChart.yAxis[0].update({
-      title:{
+      title: {
           text: state.y_title
       }
     });
@@ -785,18 +558,6 @@ export class GraphsComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const value = changes.activeCurrency.currentValue;
-    if (value !== undefined) {
-      if (value === currencies.BTC) {
-        this.graphs.swaps.ref$.subscribe((swapsChart) => {
-          this.swapChartUpdate(swapsChart, this.swapChartStates.BTC);
-        });
-      } else if (value === currencies.USD) {
-        this.graphs.swaps.ref$.subscribe((swapsChart) => {
-          this.swapChartUpdate(swapsChart, this.swapChartStates.USD);
-        });
-      }
-    }
   }
 
   showTypesSecondOptions(event) {
@@ -818,48 +579,5 @@ export class GraphsComponent implements OnInit, OnDestroy {
   }
 
   blocksChartTypeChange(selectedType): void {
-    if (!selectedType.isSelected) {
-      selectedType.isSelected = true;
-      this.selectedBlocksChartType.isSelected = false;
-      this.selectedBlocksChartType = selectedType;
-
-      if (selectedType.num == this.blockCharts[0].num) {
-        this.graphs.blocks.ref$.subscribe((blockChart) => {
-          blockChart.series[1].setData(this.lastConstructedGraphs.difficulty);
-          blockChart.update({
-            name: "Average difficulty"
-          });
-          if (!this.isMobile) {
-            blockChart.yAxis[1].update({
-                title:{
-                    text: "Average difficulty"
-                }
-            });
-          }
-          blockChart.legend.allItems[1].update({
-            name: "Average difficulty"
-          });
-          blockChart.redraw();
-        });
-      } else if (selectedType.num == this.blockCharts[1].num) {
-        this.graphs.blocks.ref$.subscribe((blockChart) => {
-          blockChart.series[1].setData(this.lastConstructedGraphs.hashrate);
-          blockChart.update({
-            name: "Average hash rate"
-          });
-          if (!this.isMobile) {
-            blockChart.yAxis[1].update({
-                title:{
-                    text: "Average hash rate"
-                }
-            });
-          }
-          blockChart.legend.allItems[1].update({
-            name: "Average hash rate"
-          });
-          blockChart.redraw();
-        });
-      }
-    }
   }
 }

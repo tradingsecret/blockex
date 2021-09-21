@@ -292,25 +292,25 @@
 .graphs-mob__block__elem .highcharts-color-1,
 .graphs__left__block__elem .highcharts-color-1 {
     @include point-fill();
-    stroke: #ff51ff;
+    stroke: white
 }
 
 .graphs-mob__block__elem .highcharts-color-2,
 .graphs__left__block__elem .highcharts-color-2 {
     @include point-fill();
-    stroke: #24c1ff;
+    stroke: white
 }
 
 .graphs-mob__block__elem .highcharts-color-3,
 .graphs__left__block__elem .highcharts-color-3 {
     @include point-fill();
-    stroke: #ff51ff;
+    stroke: white
 }
 
 .graphs-mob__block__elem .highcharts-color-0,
 .graphs__left__block__elem .highcharts-color-0 {
     @include point-fill();
-    stroke: #24c1ff;
+    stroke: white
 }
 
 .graphs-mob__fee__elem .highcharts-color-0,
@@ -443,42 +443,42 @@
 
 .graphs-mob__block__elem .highcharts-color-1 .tooltip-line-circle,
 .graphs__left__block__elem .highcharts-color-1 .tooltip-line-circle{
-    background-color: #ff51ff;
+    background-color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-1 .tooltip-line-color,
 .graphs__left__block__elem .highcharts-color-1 .tooltip-line-color{
-    color: #ff51ff;
+    color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-0 .tooltip-line-circle,
 .graphs__left__block__elem .highcharts-color-0 .tooltip-line-circle{
-    background-color: #24c1ff;
+    background-color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-0 .tooltip-line-color,
 .graphs__left__block__elem .highcharts-color-0 .tooltip-line-color{
-    color: #24c1ff;
+    color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-2 .tooltip-line-circle,
 .graphs__left__block__elem .highcharts-color-2 .tooltip-line-circle{
-    background-color: #24c1ff;
+    background-color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-2 .tooltip-line-color,
 .graphs__left__block__elem .highcharts-color-2 .tooltip-line-color{
-    color: #24c1ff;
+    color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-3 .tooltip-line-circle,
 .graphs__left__block__elem .highcharts-color-3 .tooltip-line-circle{
-    background-color: #ff51ff;
+    background-color: white
 }
 
 .graphs-mob__block__elem .highcharts-color-3 .tooltip-line-color,
 .graphs__left__block__elem .highcharts-color-3 .tooltip-line-color{
-    color: #ff51ff;
+    color: white
 }
 
 .graphs-mob__fee__elem .highcharts-color-0 .tooltip-line-circle,
