@@ -7,7 +7,7 @@
 
   <app-header-search [isAssetsVal]=isAssets></app-header-search>
 
-  <app-top-chart></app-top-chart>
+  <app-top-chart *ngIf="router.url === '/'"></app-top-chart>
 </ng-container>
 
 <ng-container *ngIf="isMobile">
@@ -17,7 +17,7 @@
         <app-header-logo></app-header-logo>
       </div>
       <app-header-search class="header-mob__content__search" [isAssetsVal]=isAssets></app-header-search>
-      <app-top-chart></app-top-chart>
+      <app-top-chart *ngIf="router.url === '/'"></app-top-chart>
     </div>
   </header>
 </ng-container>

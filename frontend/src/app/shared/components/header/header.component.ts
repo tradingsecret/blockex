@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     isAssetsButtonVisible: false
   };
 
-  constructor(private router: Router, private deviceService: DeviceDetectorService) { }
+  constructor(public router: Router, private deviceService: DeviceDetectorService) { }
 
   ngOnInit(): void {}
 

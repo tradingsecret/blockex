@@ -62,9 +62,74 @@
     max-width: 145px;
 }
 
-.details-card-container{
+.details-card-container {
     box-shadow: none;
-    max-width: 1290px;
+
+  .card_header {
+    color: white;
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+
+  .card_header_title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .main {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 7px -2px rgba(255, 255, 255, 0.05);
+    max-width: 610px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    padding: 40px 70px 30px;
+    color: white;
+    font-weight: bold;
+
+    div {
+      padding-bottom: 10px;
+    }
+  }
+
+  .data {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    align-items: stretch;
+
+    .input {
+      margin-right: 50px;
+    }
+
+    .input, .output {
+      width: 50%;
+      align-self: stretch;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0px 0px 7px -2px rgba(255, 255, 255, 0.05);
+      max-width: 610px;
+      word-wrap: break-word;
+      padding: 40px 70px 30px;
+
+      .hash {
+        div {
+          padding-bottom: 10px;
+        }
+      }
+
+      .label {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        margin-top: -100px;
+        padding-bottom: 80px;
+      }
+    }
+  }
 }
 
 .mat-header-row,
@@ -420,4 +485,35 @@
         max-width: 260px;
         min-width: 135px;
     }
+}
+
+@media (max-width: 1700px) {
+  .details-card-container {
+    .main {
+      width: 100% !important;
+      max-width: calc(100% - 140px);
+    }
+
+    .data {
+      flex-direction: column;
+      margin-top: 0 !important;
+
+      .input, .output {
+        width: 100% !important;
+        margin: 100px auto 0;
+        padding: 40px 70px 30px;
+        max-width: 610px;
+      }
+
+      .label {
+        margin-top: -100px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 1035px) {
+  .details {
+    padding: 0 20px;
+  }
 }

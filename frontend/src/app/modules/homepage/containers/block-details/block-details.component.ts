@@ -65,17 +65,21 @@ export class BlockDetailsComponent implements OnInit {
   }
 
   loadDetails(blockItem) {
-    this.block.header = 'Block ' + blockItem.height;
+    this.block.header = blockItem.height;
+    this.block.hash = blockItem.hash;
+    this.block.age = new Date(blockItem.timestamp).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long',
+      day: 'numeric', hour: 'numeric',
+      minute: 'numeric', second: 'numeric' });
+    this.block.kernelsCnt = blockItem.kernels.length;
+    this.block.fee = blockItem.fee;
     this.block.data = [
       {name: 'FEE:', value: blockItem.fee, additional: blockItem.fee !== 0 ? 'Groth' : ''},
       {name: 'HASH:', value: blockItem.hash, additional: ''},
       {name: 'DIFFICULTY:', value: blockItem.difficulty.toLocaleString(), additional: ''},
       {name: 'SUBSIDY:', value: blockItem.subsidy.toLocaleString(), additional: 'Groth'},
       {name: 'CHAINWORK:', value: blockItem.chainwork, additional: ''},
-      {name: 'AGE:', value: new Date(blockItem.timestamp).toLocaleDateString('en-US', {
-        year: 'numeric', month: 'long',
-        day: 'numeric', hour: 'numeric',
-        minute: 'numeric', second: 'numeric' }), additional: ''}
+      {name: 'AGE:', value: this.block.age, additional: ''}
     ];
 
     if (blockItem.rate_btc !== null && blockItem.rate_usd !== null) {
@@ -122,6 +126,9 @@ export class BlockDetailsComponent implements OnInit {
     this.loading_block = true;
     this.block = {
       header: '',
+      hash: '',
+      age: '',
+      kernelsCnt: '',
       data: [],
       inputs: [],
       outputs: [],
