@@ -1,0 +1,22 @@
+<ng-container>
+  <div class="card_header">
+    <div class="card_header_title">Live statistic</div>
+  </div>
+
+  <div class="top-chart-container" [class.mobile]="isMobile">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+      [stroke]="chartOptions.stroke"
+      [fill]="chartOptions.fill"
+      [markers]="chartOptions.markers"
+      [grid]="chartOptions.grid"
+      [dataLabels]="chartOptions.dataLabels"
+      [tooltip]="chartOptions.tooltip"
+      [colors]="chartOptions.colors"
+      [yaxis]="chartOptions.yaxis"
+    ></apx-chart>
+  </div>
+</ng-container>

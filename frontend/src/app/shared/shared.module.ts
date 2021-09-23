@@ -6,6 +6,8 @@ import { HeaderComponent } from './components';
 import { HeaderLogoComponent } from './components/header-logo/header-logo.component';
 import { HeaderToggleSwitchComponent } from './components/header-toggle-switch/header-toggle-switch.component';
 import { HeaderSearchComponent } from './components/header-search/header-search.component';
+import {TopChartComponent} from './components/top-chart/top-chart.component';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { HeaderSearchComponent } from './components/header-search/header-search.
     HeaderLogoComponent,
     HeaderToggleSwitchComponent,
     HeaderSearchComponent,
+    TopChartComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    NgApexchartsModule,
   ],
   exports: [
     MainLayoutComponent,

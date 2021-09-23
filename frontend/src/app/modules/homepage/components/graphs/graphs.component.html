@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="!isMobile">
   <div class="graphs" *ngIf="graphsLoaded">
     <div class="graphs__left">
       <div class="graphs__left__block">
@@ -15,6 +15,24 @@
       <div class="graphs__right__lelantus">
         <div class="graphs__left__block__elem" [chart]="graphs.transactions1"></div>
       </div>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="isMobile">
+  <div class="graphs-mob" *ngIf="graphsLoaded">
+    <div class="graphs-mob__block">
+      <div class="graphs-mob__block__elem" [chart]="graphs.blocks"></div>
+    </div>
+    <div class="graphs-mob__block">
+      <div class="graphs-mob__block__elem" [chart]="graphs.blocks1"></div>
+    </div>
+    <div class="graphs-mob__block">
+      <div class="graphs-mob__block__elem" [chart]="graphs.transactions"></div>
+    </div>
+    <div class="graphs-mob__block">
+      <div class="graphs-mob__block__elem" [chart]="graphs.transactions1"></div>
     </div>
   </div>
 </ng-container>

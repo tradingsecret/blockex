@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
   public componentParams = {
     isSearchInputVisible: false,
     isAssetsButtonVisible: false
-  }
-  
+  };
+
   constructor(private router: Router, private deviceService: DeviceDetectorService) { }
 
   ngOnInit(): void {}

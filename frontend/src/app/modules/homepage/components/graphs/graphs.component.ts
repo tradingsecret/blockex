@@ -1,11 +1,17 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, SimpleChanges, Input, HostListener, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  SimpleChanges,
+  Input,
+  HostListener,
+  OnDestroy,
+} from '@angular/core';
 import { WebsocketService } from '../../../../modules/websocket';
 import { WS } from '../../../../websocket.events';
 import { Observable } from 'rxjs';
-import { currencies } from '../../../../consts';
 
 import { Chart } from 'angular-highcharts';
-import { matSelectAnimations } from '@angular/material/select';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 export interface IGraphs {
@@ -220,7 +226,6 @@ export class GraphsComponent implements OnInit, OnDestroy {
         yAxis: 0
       }],
     });
-
 
     this.graphs.blocks1 = new Chart({
       title: {

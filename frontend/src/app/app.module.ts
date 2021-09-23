@@ -10,6 +10,7 @@ import { WebsocketModule } from './modules/websocket';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       url: environment.wsEndpoint
     }),
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

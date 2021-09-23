@@ -4,7 +4,7 @@ import { from, Observable } from 'rxjs';
 import { WebsocketService } from '../../../../modules/websocket';
 import { WS } from '../../../../websocket.events';
 import { DataService } from '../../../../services/data/data.service';
-import { currencies } from '../../../../consts'
+import { currencies } from '../../../../consts';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 export interface IStatus {
@@ -17,7 +17,7 @@ export interface IStatus {
   total_coins_in_circulation: number;
   next_treasury_emission_block_height: string;
   next_treasury_emission_coin_amount: string;
-  total_emission: string;
+  total_emission: number;
   swaps_stats_btc: {
     bitcoin: number,
     dash: number,
@@ -32,7 +32,7 @@ export interface IStatus {
     litecoin: number,
     qtum: number
   };
-  swaps_stats_sum_btc: number,
+  swaps_stats_sum_btc: number;
   swaps_stats_sum_usd: number;
 }
 
@@ -59,7 +59,7 @@ export class StatusCardsComponent implements OnInit, OnDestroy, AfterContentInit
   public switcherValues = {
     BTC: currencies.BTC,
     USD: currencies.USD
-  }
+  };
   public isSwitcherVisible = false;
   public switcherSelectedValue: string = this.switcherValues.USD;
   private lastStatusData: IStatus;
@@ -69,7 +69,7 @@ export class StatusCardsComponent implements OnInit, OnDestroy, AfterContentInit
     isTreasuryCardExpanded: false,
     isEmissionCardExpanded: false,
     isOffersCardExpanded: false
-  }
+  };
 
   constructor(
     private wsService: WebsocketService,
@@ -112,7 +112,7 @@ export class StatusCardsComponent implements OnInit, OnDestroy, AfterContentInit
       } else if (this.switcherSelectedValue === this.switcherValues.BTC) {
         this.loadOffersStats(data.swaps_stats_btc);
       }
-      
+
       if (this.lastHeight === undefined || data.height > this.lastHeight) {
         this.dataService.height.next(data.height);
         this.lastHeight = data.height;

@@ -1,0 +1,17 @@
+.powered-by-container {
+  margin: 70px 0;
+  text-align: center;
+
+  .powered-by {
+    color: white;
+    font-weight: bold;
+  }
+
+  img {
+    display: block;
+    margin: 10px auto 0;
+    width: 250px;
+    -webkit-filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);
+  }
+}

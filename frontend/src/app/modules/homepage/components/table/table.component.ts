@@ -13,9 +13,11 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy {
-  @HostListener('document:click', ['$event']) clickout(event: any) {
-    this.isSelectedOfferVisible = false;
-  }
+
+  constructor(
+    private deviceService: DeviceDetectorService,
+    private dataService: DataService,
+    private router: Router) { }
 
   public icons = {
     BTC: {
@@ -58,9 +60,9 @@ export class TableComponent implements OnInit, OnDestroy {
       value: 'DAI',
       iconUrl: `../../../../../assets/modules/homepage/components/table/icon-dai.svg`
     }
-  }
-  public iconBeamUrl: string = `../../../../../assets/modules/homepage/components/table/icon-beam.svg`;
-  public iconArrowDownUrl: string = `../../../../../assets/modules/homepage/components/table/arrow-down.svg`;
+  };
+  public iconBeamUrl = `../../../../../assets/modules/homepage/components/table/icon-beam.svg`;
+  public iconArrowDownUrl = `../../../../../assets/modules/homepage/components/table/arrow-down.svg`;
 
   public selectorTitles = {
     BLOCKS: 'BLOCKS',
@@ -69,9 +71,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
   public displayedOffersColumns: string[] = [
     'coins', 'amount-send', 'amount-rec', 'rate', 'created', 'expired', 'tr-id'
-  ]
-  public displayedColumns: string[] = ['height', 'hash', 'age',
-    'difficulty', 'kernels', 'inputs', 'outputs', 'fees'];
+  ];
+  public displayedColumns: string[] = ['age', 'hash', 'kernels', ];
   public selectorActiveTitle = this.selectorTitles.BLOCKS;
   public isMobile = this.deviceService.isMobile();
 
@@ -140,18 +141,16 @@ export class TableComponent implements OnInit, OnDestroy {
   public isSelectedOfferVisible = false;
 
   public blocksCount: number;
-  public blocksPage: number = 0;
+  public blocksPage = 0;
   public blocksData: any;
   public offersCount: number;
-  public offersPage: number = 0;
+  public offersPage = 0;
   public offersData: any;
   public offersLoadInProgress = false;
   private subscriber: any;
-
-  constructor(
-    private deviceService: DeviceDetectorService,
-    private dataService: DataService,
-    private router: Router) { }
+  @HostListener('document:click', ['$event']) clickout(event: any) {
+    this.isSelectedOfferVisible = false;
+  }
 
   ngOnInit(): void {
     this.subscriber = this.dataService.height.subscribe((value) => {
@@ -162,7 +161,7 @@ export class TableComponent implements OnInit, OnDestroy {
       } else {
         this.loadOffers({
           pageIndex: this.offersPage
-        })
+        });
       }
     });
     this.loadOffers(null);
@@ -182,8 +181,8 @@ export class TableComponent implements OnInit, OnDestroy {
     this.blocksPage = event ? event.pageIndex : 0;
 
     this.dataService.loadBlocks(this.blocksPage).subscribe((data) => {
-      this.blocksData = new MatTableDataSource(data['results']);
-      this.blocksCount = data['count'];
+      this.blocksData = new MatTableDataSource(data.results.slice(0, 5));
+      this.blocksCount = data.count;
     });
 
     return event;
@@ -199,12 +198,12 @@ export class TableComponent implements OnInit, OnDestroy {
           item.active = false;
         }
       });
-      data['offers'].map(element => {
-        let createdDate = new Date(element.time_created.replaceAll('.', '-').replace(' ', 'T')+'Z');
+      data.offers.map(element => {
+        const createdDate = new Date(element.time_created.replaceAll('.', '-').replace(' ', 'T') + 'Z');
         const heightDiffInHours = (element.height_expired - element.min_height) / 60;
         element.time_created = createdDate.toUTCString();
-        element['expired_time'] = createdDate.setHours(createdDate.getHours() + Math.round(heightDiffInHours));
-        
+        element.expired_time = createdDate.setHours(createdDate.getHours() + Math.round(heightDiffInHours));
+
         const filterItem = this.offerFilters.find((item) => {
           return item.value === element.swap_currency;
         });
@@ -215,7 +214,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
         return element;
       });
-      this.offersData = new MatTableDataSource(data['offers']);
+      this.offersData = new MatTableDataSource(data.offers);
       this.offersData.filterPredicate = function(data: any, filterValue: string) {
         return data.swap_currency === filterValue;
       };
@@ -224,7 +223,7 @@ export class TableComponent implements OnInit, OnDestroy {
       } else {
         this.offersData.filter = '';
       }
-      this.offersCount = data['count'];
+      this.offersCount = data.count;
       this.offersLoadInProgress = false;
     });
 
@@ -297,9 +296,9 @@ export class TableComponent implements OnInit, OnDestroy {
 
   getCurrencyTitle(elem) {
     if (!elem.is_beam_side) {
-      return elem.swap_currency+'/BEAM';
+      return elem.swap_currency + '/BEAM';
     } else {
-      return 'BEAM/'+elem.swap_currency;
+      return 'BEAM/' + elem.swap_currency;
     }
   }
 

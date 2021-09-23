@@ -3,6 +3,7 @@ import { DataService } from './../../../services';
 import { Router } from '@angular/router';
 import { routesConsts } from './../../../consts';
 import { ActivatedRoute} from '@angular/router';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-header-search',
@@ -14,10 +15,16 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
 
   public placeholderVal: string;
   @ViewChild('searchInput', { static: false }) input: ElementRef;
-  constructor(private dataService: DataService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private deviceService: DeviceDetectorService
+    ) {}
 
   ngOnInit(): void {
-    this.placeholderVal =  this.isAssetsVal ? 'Search by asset, description, ratio' : 'Search by height, hash, kernel ID';
+    this.placeholderVal =   this.deviceService.isMobile() ? 'Search in blockchain' : 'Search here any transactions if they are not anonymous';
+    // this.placeholderVal =  this.isAssetsVal ? 'Search by asset, description, ratio' : 'Search by height, hash, kernel ID';
   }
 
   ngAfterViewInit() {

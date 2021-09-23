@@ -1,3 +1,50 @@
+<ng-container>
+  <div class="card_header">
+    <div class="card_header_title">Summary information</div>
+  </div>
+
+  <div class="cards" *ngIf="statusData$ | async as data">
+    <div class="card">
+      <div class="card__left-part">
+        <div class="card__left-part__upper">
+          <div class="card-header">Clusters height</div>
+          <div class="card-content">{{data.height | number:'.'}}</div>
+        </div>
+        <div class="card__left-part__lower">
+          <div class="card-header">New cluster timestamp</div>
+          <div class="card-content">{{data.dateFormatted | date:'medium'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__left-part">
+        <div class="card__left-part__upper">
+          <div class="card-header">Blockchain difficulty</div>
+          <div class="card-content">{{data.difficulty | number:'.'}}</div>
+        </div>
+        <div class="card__left-part__lower">
+          <div class="card-header">Total supply</div>
+          <div class="card-content">{{data.total_emission | number:'.'}} ARC</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__left-part">
+        <div class="card__left-part__upper">
+          <div class="card-header">Circulation supply</div>
+          <div class="card-content">{{data.coins_in_circulation_mined | number:'.'}} ARC</div>
+        </div>
+        <div class="card__left-part__lower">
+          <div class="card-header">Non-circulation supply</div>
+          <div class="card-content">{{(data.total_emission - data.coins_in_circulation_mined) | number:'.'}} ARC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!--
+
 <ng-container *ngIf="!isMobile">
     <div class="cards" *ngIf="statusData$ | async as data">
         <div class="cards__left">
@@ -75,7 +122,7 @@
                             <ng-container *ngIf="data.swaps_stats_sum_usd !== 0 ">
                                 <div class="card-content">
                                     {{(switcherSelectedValue === switcherValues.USD ?
-                                        data.swaps_stats_sum_usd : data.swaps_stats_sum_btc) | number:'1.0-8'}} 
+                                        data.swaps_stats_sum_usd : data.swaps_stats_sum_btc) | number:'1.0-8'}}
                                         {{switcherSelectedValue | uppercase}}
                                 </div>
                             </ng-container>
@@ -94,22 +141,22 @@
                                     <span class="volumes-control__header unselectable">TOP VOLUMES</span>
                                     <span class="volumes-control__arrow">
                                         <span class="volumes-control__arrow__item">
-                                            <span class="volumes-control__arrow__item__left" 
+                                            <span class="volumes-control__arrow__item__left"
                                                     [class.active]="isVolumesSelectVisible"></span>
-                                            <span class="volumes-control__arrow__item__right" 
+                                            <span class="volumes-control__arrow__item__right"
                                                     [class.active]="isVolumesSelectVisible"></span>
                                         </span>
                                     </span>
                                 </div>
                                 <div class="switch" *ngIf="isSwitcherVisible">
-                                    <div #usd class="switch__usd" 
+                                    <div #usd class="switch__usd"
                                         [class.selected]="switcherSelectedValue === switcherValues.USD"
                                         (click)="switcherClicked($event, switcherValues.USD)">USD</div>
                                     <div #btc class="switch__btc"
                                         [class.selected]="switcherSelectedValue === switcherValues.BTC"
                                         (click)="switcherClicked($event, switcherValues.BTC)">BTC</div>
                                     <div #selector class="selector"
-                                        [ngStyle]="{'left': switcherSelectedValue === switcherValues.USD ? 
+                                        [ngStyle]="{'left': switcherSelectedValue === switcherValues.USD ?
                                             -1 + 'px' : usd.clientWidth + 1 + 'px',
                                             'width': switcherSelectedValue === switcherValues.USD ?
                                             usd.clientWidth + 'px' : btc.clientWidth + 'px'}">
@@ -118,11 +165,11 @@
                                 </div>
                             </div>
                             <div class="card-offering">
-                                <div class="card-offering__item" 
+                                <div class="card-offering__item"
                                         *ngFor="let item of (isVolumesSelectVisible ? offers : mostOffering)">
                                     <span class="card-offering__item__title">{{item.title}}:</span>
                                     <span class="card-offering__item__value">
-                                        {{item.value | number:'1.0-8'}} 
+                                        {{item.value | number:'1.0-8'}}
                                         {{switcherSelectedValue | uppercase}}
                                     </span>
                                 </div>
@@ -143,9 +190,9 @@
                     <span>BLOCKCHAIN HEIGHT</span>
                     <span class="section-control__arrow">
                         <span class="section-control__arrow__item">
-                            <span class="section-control__arrow__item__left" 
+                            <span class="section-control__arrow__item__left"
                                     [class.active]="componentParams.isBlockCardExpanded"></span>
-                            <span class="section-control__arrow__item__right" 
+                            <span class="section-control__arrow__item__right"
                                     [class.active]="componentParams.isBlockCardExpanded"></span>
                         </span>
                     </span>
@@ -174,9 +221,9 @@
                     <span>TOTAL COINS IN CIRCULATION</span>
                     <span class="section-control__arrow">
                         <span class="section-control__arrow__item">
-                            <span class="section-control__arrow__item__left" 
+                            <span class="section-control__arrow__item__left"
                                     [class.active]="componentParams.isTreasuryCardExpanded"></span>
-                            <span class="section-control__arrow__item__right" 
+                            <span class="section-control__arrow__item__right"
                                     [class.active]="componentParams.isTreasuryCardExpanded"></span>
                         </span>
                     </span>
@@ -201,9 +248,9 @@
                     <span>TOTAL EMISSION</span>
                     <span class="section-control__arrow">
                         <span class="section-control__arrow__item">
-                            <span class="section-control__arrow__item__left" 
+                            <span class="section-control__arrow__item__left"
                                     [class.active]="componentParams.isEmissionCardExpanded"></span>
-                            <span class="section-control__arrow__item__right" 
+                            <span class="section-control__arrow__item__right"
                                     [class.active]="componentParams.isEmissionCardExpanded"></span>
                         </span>
                     </span>
@@ -228,9 +275,9 @@
                     <span>TOTAL OFFERS AMOUNT (last 24 hours)</span>
                     <span class="section-control__arrow" *ngIf="data.swaps_stats_sum_usd !== 0">
                         <span class="section-control__arrow__item">
-                            <span class="section-control__arrow__item__left" 
+                            <span class="section-control__arrow__item__left"
                                     [class.active]="componentParams.isOffersCardExpanded"></span>
-                            <span class="section-control__arrow__item__right" 
+                            <span class="section-control__arrow__item__right"
                                     [class.active]="componentParams.isOffersCardExpanded"></span>
                         </span>
                     </span>
@@ -238,18 +285,18 @@
                 <ng-container *ngIf="data.swaps_stats_sum_usd !== 0 ">
                     <div class="card-content curr">
                         <span>{{(switcherSelectedValue === switcherValues.USD ?
-                            data.swaps_stats_sum_usd : data.swaps_stats_sum_btc) | number:'1.0-8'}} 
+                            data.swaps_stats_sum_usd : data.swaps_stats_sum_btc) | number:'1.0-8'}}
                             {{switcherSelectedValue | uppercase}}
                         </span>
                         <div class="switch curr" *ngIf="isSwitcherVisible">
-                            <div #usd class="switch__usd" 
+                            <div #usd class="switch__usd"
                                 [class.selected]="switcherSelectedValue === switcherValues.USD"
                                 (click)="switcherClicked($event, switcherValues.USD)">USD</div>
                             <div #btc class="switch__btc"
                                 [class.selected]="switcherSelectedValue === switcherValues.BTC"
                                 (click)="switcherClicked($event, switcherValues.BTC)">BTC</div>
                             <div #selector class="selector"
-                                [ngStyle]="{'left': switcherSelectedValue === switcherValues.USD ? 
+                                [ngStyle]="{'left': switcherSelectedValue === switcherValues.USD ?
                                     -1 + 'px' : usd.clientWidth + 1 + 'px',
                                     'width': switcherSelectedValue === switcherValues.USD ?
                                     usd.clientWidth + 'px' : btc.clientWidth + 'px'}">
@@ -268,11 +315,11 @@
                 <div class="card-mob__section dist">
                     <div class="card-header">TOP VOLUMES</div>
                     <div class="card-offering">
-                        <div class="card-offering__item" 
+                        <div class="card-offering__item"
                                 *ngFor="let item of offers">
                             <span class="card-offering__item__title">{{item.title}}:</span>
                             <span class="card-offering__item__value">
-                                {{item.value | number:'1.0-8'}} 
+                                {{item.value | number:'1.0-8'}}
                                 {{switcherSelectedValue | uppercase}}
                             </span>
                         </div>
@@ -282,3 +329,4 @@
         </div>
     </div>
 </ng-container>
+-->

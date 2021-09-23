@@ -6,12 +6,13 @@
 .cards {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
     &__left,
     &__right {
         display: flex;
         flex-direction: column;
-        width: 50%;
 
         &__top,
         &__bottom {
@@ -34,19 +35,20 @@
 }
 
 .card {
-    width: 100%;
+    width: 350px;
     padding: 20px;
     display: flex;
     flex-direction: row;
     height: 106px;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.05);
+    -webkit-box-shadow: 0px 0px 7px -2px rgba(255, 255, 255, 0.05);;
+    box-shadow: 0px 0px 7px -2px rgba(255, 255, 255, 0.05);;
 
     &__left-part,
     &__right-part {
         display: flex;
         flex-direction: column;
-        width: 50%;
 
         &__lower {
             margin-top: auto;
@@ -54,12 +56,23 @@
     }
 }
 
+.card_header {
+  color: white;
+  padding-bottom: 30px;
+}
+
+.card_header_title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 .card.active {
     height: 213px;
 }
 
 .card-header {
-    opacity: 0.5;
+    opacity: 1;
     font-size: 12px;
     font-weight: 600;
     font-stretch: normal;
@@ -106,7 +119,7 @@
 
     &__item {
         margin-top: 8px;
-        
+
         &__title {
             font-weight: 600;
             color: rgba(255, 255, 255, 0.5);
@@ -144,12 +157,12 @@
                 display: inline-block;
                 transition: all .2s ease;
             }
-            
+
             &__left {
                 left: 0;
                 transform: rotate(45deg);
             }
-            
+
             &__right {
                 right: 0px;
                 transform: rotate(-45deg);
@@ -193,7 +206,7 @@
     border: solid 1px rgba(255, 255, 255, 0.3);
     position: relative;
 }
-  
+
 .switch__usd,
 .switch__btc {
     cursor: pointer;
@@ -296,12 +309,12 @@
                 display: inline-block;
                 transition: all .2s ease;
             }
-            
+
             &__left {
                 left: 0;
                 transform: rotate(45deg);
             }
-            
+
             &__right {
                 right: 0px;
                 transform: rotate(-45deg);
