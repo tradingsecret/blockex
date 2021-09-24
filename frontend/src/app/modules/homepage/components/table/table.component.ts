@@ -185,8 +185,6 @@ export class TableComponent implements OnInit, OnDestroy {
       this.blocksData = new MatTableDataSource(data.results.slice(0, 5));
       this.blockList = data.results.slice(0, 5);
       this.blocksCount = data.count;
-
-      console.log(this.blockList);
     });
 
     return event;
