@@ -165,7 +165,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       chart: {
         shadow: false,
-        height: this.isMobile ? 420 : 430,
+        height: 450,
         ignoreHiddenSeries: false,
         type: 'line',
         styledMode: true
@@ -200,11 +200,10 @@ export class GraphsComponent implements OnInit, OnDestroy {
       legend: {
         width: 380,
         itemWidth: 190,
-        itemMarginBottom: 12,
         layout: 'horizontal',
         align: 'center',
         verticalAlign: 'bottom',
-        x: this.isMobile ? 40 : 0,
+        x: 40,
         y: 10
       },
       tooltip: {
@@ -224,7 +223,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         name: 'Average difficulty',
         data: graphs.difficulty,
         yAxis: 0
-      }],
+      }, ],
     });
 
     this.graphs.blocks1 = new Chart({
@@ -233,7 +232,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       chart: {
         shadow: false,
-        height: this.isMobile ? 420 : 430,
+        height: 450,
         ignoreHiddenSeries: false,
         type: 'line',
         styledMode: true
@@ -251,7 +250,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       yAxis: [{
         title: {
           text: this.isMobile ? '' : 'Blocks per hour',
-          margin: 24
+          margin: 34
         }
       }, ],
       xAxis: {
@@ -266,11 +265,10 @@ export class GraphsComponent implements OnInit, OnDestroy {
       legend: {
         width: 380,
         itemWidth: 190,
-        itemMarginBottom: 12,
         layout: 'horizontal',
         align: 'center',
         verticalAlign: 'bottom',
-        x: this.isMobile ? 40 : 0,
+        x: 40,
         y: 10
       },
       tooltip: {
@@ -298,7 +296,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       chart: {
         shadow: false,
-        height: this.isMobile ? 420 : 430,
+        height: 450,
         ignoreHiddenSeries: false,
         type: 'line',
         styledMode: true,
@@ -317,7 +315,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         lineColor: '#ff51ff',
         title: {
           text: this.isMobile ? '' : 'Regular transactions amount',
-          margin: 24
+          margin: 34
         },
       }],
       xAxis: {
@@ -335,7 +333,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         layout: 'horizontal',
         align: 'center',
         verticalAlign: 'bottom',
-        x: this.isMobile ? 40 : 0,
+        x: 40,
         y: 10,
       },
       tooltip: {
@@ -363,7 +361,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       chart: {
         shadow: false,
-        height: this.isMobile ? 420 : 430,
+        height: 450,
         ignoreHiddenSeries: false,
         type: 'line',
         styledMode: true
@@ -381,7 +379,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       yAxis: [{
         title: {
           text: this.isMobile ? '' : 'Shielded transactions amount',
-          margin: 24
+          margin: 34
         }
       }],
       xAxis: {
@@ -399,7 +397,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         layout: 'horizontal',
         align: 'center',
         verticalAlign: 'bottom',
-        x: this.isMobile ? 40 : 0,
+        x: 40,
         y: 10
       },
       tooltip: {

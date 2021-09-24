@@ -1,37 +1,42 @@
-<div class="table-container" [class.mobile]="isMobile">
-  <div class="card_header">
-    <div class="card_header_title">Latest cluster iteractions</div>
-  </div>
-    <div class="table-container__content">
-        <ng-container *ngIf="selectorActiveTitle === selectorTitles.BLOCKS">
-            <mat-table [dataSource]="blocksData" class="blocks-table" [class.mobile]="isMobile">
-              <ng-container matColumnDef="age">
-                <mat-header-cell class="age-cell-header" *matHeaderCellDef> AGE: </mat-header-cell>
-                <mat-cell class="age-cell" *matCellDef="let element">
-                  <span class="mobile-label" *ngIf="isMobile">AGE:</span>
-                  <span class="desktop-label" [class.mobile]="isMobile">{{element.timestamp | date:'medium'}}</span>
-                </mat-cell>
-              </ng-container>
-                <ng-container matColumnDef="hash">
-                    <mat-header-cell class="hash-cell-header" *matHeaderCellDef> HASH: </mat-header-cell>
-                    <mat-cell class="hash-cell" *matCellDef="let element">
-                        <span class="mobile-label" *ngIf="isMobile">HASH:</span>
-                        <span class="desktop-label" [class.mobile]="isMobile">{{element.hash}}</span>
-                    </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="kernels">
-                    <mat-header-cell class="kernel-cell-header" *matHeaderCellDef> #KERNELS: </mat-header-cell>
-                    <mat-cell class="kernel-cell" *matCellDef="let element">
-                        <span class="mobile-label" *ngIf="isMobile">#KERNELS:</span>
-                        <span class="desktop-label" [class.mobile]="isMobile">{{element.kernels | number:'.'}}</span>
-                    </mat-cell>
-                </ng-container>
-                <mat-header-row *matHeaderRowDef="displayedColumns"
-                                class="blocks-table-header-row"
-                                [class.mobile]="isMobile"></mat-header-row>
-                <mat-row class="blocks-table-row" [class.mobile]="isMobile" (click)="showBlockDetails(row)"
-                    *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-        </ng-container>
-    </div>
+<div class="card_header">
+  <div class="card_header_title">Latest cluster interactions</div>
 </div>
+
+<div class="table-container">
+  <div class="table-container__content">
+    <div class="cluster-table">
+      <div class="column">
+        <div>Timestamp:</div>
+        <div *ngFor="let item of blockList">{{ item.timestamp | date:'medium' }}</div>
+      </div>
+      <div class="column">
+        <div>Hash:</div>
+        <div *ngFor="let item of blockList">
+          <a routerLink="/block/{{ item.hash }}">{{ item.hash }}</a>
+        </div>
+      </div>
+      <div class="column">
+        <div>Kernels:</div>
+        <div *ngFor="let item of blockList">{{ item.kernels }}</div>
+      </div>
+    </div>
+
+    <div class="cluster-table_mobile">
+      <div class="row" *ngFor="let item of blockList">
+        <div class="row-item">
+          <div>Timestamp:</div>
+          <div >{{ item.timestamp | date:'medium' }}</div>
+        </div>
+        <div class="row-item">
+          <div>Hash:</div>
+          <a routerLink="/block/{{ item.hash }}">{{ item.hash }}</a>
+        </div>
+        <div class="row-item">
+          <div>Kernels:</div>
+          <div>{{ item.kernels }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

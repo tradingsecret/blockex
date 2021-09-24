@@ -29,17 +29,18 @@
 }
 
 .search-header-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  content: 'abc' !important;
   color: white;
   font-weight: bold;
 }
 
 .search-header-input::-ms-input-placeholder { /* Microsoft Edge */
+  content: 'abc' !important;
   color: white;
   font-weight: bold;
 }
 
 .search-header-input::-webkit-search-cancel-button {
-
     /* Remove default */
     appearance: none;
     -moz-appearance: none;
@@ -91,3 +92,9 @@
 //     // font-style: italic;
 //     // color: red;
 // }
+
+@media (max-width: 900px) {
+  .search-header-input {
+    max-width: 300px !important;
+  }
+}

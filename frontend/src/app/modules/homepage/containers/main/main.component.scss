@@ -78,8 +78,16 @@
 }
 
 
-@media(max-width: 1440px) {
-    .container:not(.mobile) {
-        min-width: 1350px;
+@media (max-width: 900px) {
+  .container {
+    &__overview {
+      padding: 20px 20px 40px;
     }
+
+    &__graphs {
+      padding: 20px 20px 40px;
+    }
+  }
 }
+
+

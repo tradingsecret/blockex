@@ -171,5 +171,14 @@
     background-size: cover;
 }
 
-@meida (max-width: 650px) {
+@media(max-width: 1400px) {
+  app-header-logo {
+    margin: 0 auto;
+  }
+
+  .header {
+    &__content {
+      padding: 0 0 !important;
+    }
+  }
 }

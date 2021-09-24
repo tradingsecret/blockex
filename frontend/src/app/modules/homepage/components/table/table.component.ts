@@ -143,6 +143,7 @@ export class TableComponent implements OnInit, OnDestroy {
   public blocksCount: number;
   public blocksPage = 0;
   public blocksData: any;
+  public blockList: Array<any>;
   public offersCount: number;
   public offersPage = 0;
   public offersData: any;
@@ -182,7 +183,10 @@ export class TableComponent implements OnInit, OnDestroy {
 
     this.dataService.loadBlocks(this.blocksPage).subscribe((data) => {
       this.blocksData = new MatTableDataSource(data.results.slice(0, 5));
+      this.blockList = data.results.slice(0, 5);
       this.blocksCount = data.count;
+
+      console.log(this.blockList);
     });
 
     return event;

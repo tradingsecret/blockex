@@ -502,7 +502,7 @@
         width: 100% !important;
         margin: 100px auto 0;
         padding: 40px 70px 30px;
-        max-width: 610px;
+        max-width: calc(100% - 140px);
       }
 
       .label {

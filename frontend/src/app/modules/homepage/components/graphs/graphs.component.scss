@@ -132,7 +132,6 @@
             padding: 0 5px;
             display: flex;
             flex-direction: column;
-            margin-top: 45px;
 
             &__title {
                 margin-left: 81px;
@@ -736,4 +735,14 @@
   text-align: center;
   font-size: 25px;
   font-weight: bold;
+}
+
+@media (max-width: 1400px) {
+  .graphs {
+    flex-direction: column !important;
+  }
+
+  .graphs__left, .graphs__right {
+    width: 100% !important;
+  }
 }
