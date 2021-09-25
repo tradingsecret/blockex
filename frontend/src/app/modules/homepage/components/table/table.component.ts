@@ -182,8 +182,8 @@ export class TableComponent implements OnInit, OnDestroy {
     this.blocksPage = event ? event.pageIndex : 0;
 
     this.dataService.loadBlocks(this.blocksPage).subscribe((data) => {
-      this.blocksData = new MatTableDataSource(data.results.slice(0, 5));
-      this.blockList = data.results.slice(0, 5);
+      this.blocksData = new MatTableDataSource(data.results.slice(0, 20));
+      this.blockList = data.results.slice(0, 20);
       this.blocksCount = data.count;
     });
 
