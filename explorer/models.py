@@ -63,7 +63,7 @@ class Output(models.Model):
 
 
 class Kernel(models.Model):
-    block = models.ForeignKey(Block, related_name='kernels', on_delete=models.CASCADE)
+    block = models.ForeignKey(Block, related_name='kernels', on_delete=models.CASCADE, db_index=True)
     fee = models.FloatField()
     extra = models.CharField(null=False, blank=False, max_length=128)
     kernel_id = models.CharField(null=False, blank=False, max_length=128)

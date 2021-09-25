@@ -46,6 +46,25 @@ def get_block_range(request):
 
 
 @api_view(['GET'])
+def get_top_chart(request):
+    now = datetime.now()
+    categories = []
+    data = []
+
+    for x in range(0, 12):
+        categories.append('{dt.month}/{dt.day}/{dt.year}'.format(dt = (now - timedelta(days=x))))
+        from_date = (now - timedelta(days=x)).strftime('%Y-%m-%d 00:00:00+00:00')
+        to_date = (now - timedelta(days=x)).strftime('%Y-%m-%d 23:59:59+00:00')
+        data.append(Block.objects.filter(timestamp__gte=from_date, timestamp__lt=to_date).order_by('height').count());
+
+    return Response({
+        'data': {
+            'categories': categories,
+            'data': data,
+        }
+    }, status=HTTP_200_OK)
+
+@api_view(['GET'])
 def get_status(request):
     status_data = _redis.get("status")
     stream = io.BytesIO(status_data)

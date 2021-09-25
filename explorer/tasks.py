@@ -549,7 +549,6 @@ def update_charts():
     _redis.set('graph_data', json.dumps(result, default=str))
     return True
 
-
 @shared_task(name='update_notification', ignore_result=True)
 def update_notification():
     channel_layer = get_channel_layer()
