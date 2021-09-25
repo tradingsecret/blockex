@@ -34,6 +34,10 @@ export class DataService {
     this.height = new Subject<number>();
   }
 
+  loadTopChart(): any {
+    return this.http.get<any>(this.API_BASE + '/explorer/top_chart/', this.getQueryOptions());
+  }
+
   loadBlocks(page = 1): any {
     return this.http.get<Block[]>(this.API_BASE + '/explorer/blocks/' + '?page=' + (page + 1), this.getQueryOptions());
   }
@@ -58,9 +62,6 @@ export class DataService {
   private getQueryOptions() {
       return {
           withCredentials: true,
-          /*headers: new HttpHeaders({
-            'Access-Control-Allow-Origin':  '*',
-          })*/
       };
   }
 

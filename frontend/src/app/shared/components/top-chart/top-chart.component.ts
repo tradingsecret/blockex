@@ -8,6 +8,7 @@ import {
   ApexTitleSubtitle, ApexStroke, ApexFill, ApexMarkers, ApexGrid, ApexDataLabels, ApexTooltip, ApexYAxis
 } from 'ng-apexcharts';
 import {DeviceDetectorService} from "ngx-device-detector";
+import {DataService} from "../../../services";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -34,11 +35,14 @@ export class TopChartComponent {
   public chartOptions: Partial<ChartOptions>;
   public isMobile = this.deviceService.isMobile();
 
-  constructor(private deviceService: DeviceDetectorService) {
-    this.chartOptions = {
+  constructor(private deviceService: DeviceDetectorService, private dataService: DataService) {
+
+
+    const data = this.dataService.loadTopChart().subscribe((data) => {
+      this.chartOptions = {
       series: [{
         name: 'Transactions',
-        data: [14, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5]
+        data: data.data.data,
       }],
       chart: {
         foreColor: 'rgba(255, 255, 255, 0.65)',
@@ -58,14 +62,13 @@ export class TopChartComponent {
           opacity: .1
         }
       },
-      // @ts-ignore
       stroke: {
         width: 5,
         curve: 'smooth'
       },
       xaxis: {
         type: 'datetime',
-        categories: ['1/11/2000', '2/11/2000', '3/11/2000', '4/11/2000', '5/11/2000', '6/11/2000', '7/11/2000', '8/11/2000', '9/11/2000', '10/11/2000', '11/11/2000', '12/11/2000']
+        categories: data.data.categories,
       },
       title: {
         text: '',
@@ -127,5 +130,9 @@ export class TopChartComponent {
         },
       }
     };
+
+      console.log('data update', data);
+    });
+
   }
 }

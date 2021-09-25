@@ -11,6 +11,7 @@ router.register(r'blocks', BlockViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    url(r'^top_chart/$', get_top_chart),
     url(r'^status/$', get_status),
     url(r'^range/$', get_block_range),
     url(r'^block/$', get_block),

@@ -138,6 +138,12 @@ You are done with the backend!!!
     from explorer.tasks import *
     update_blockchain()
     update_notification()
+    
+    #or another way
+    celery -A blockex worker --loglevel=info
+    python3 manage.py shell
+    from explorer.tasks import *
+    update_blockchain.delay()
 ```
 
 # Explorer API documentation 
