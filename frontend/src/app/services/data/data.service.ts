@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Subject} from 'rxjs';
 
-import { Block, Asset, Offer } from '../../models';
+import {Block, Asset, Offer} from '../../models';
 
 const SEPARATOR = ';';
+
 const enum PARAMS {
   ASSET_NAME = 'N=',
   ASSET_CODE = 'SN=',
@@ -27,6 +28,7 @@ const enum PARAMS {
 })
 export class DataService {
   API_BASE = environment.apiBaseUrl;
+  API_BASE_FAUCET = environment.apiBaseFaucetUrl;
   assetsList = [];
   public height: Subject<number>;
 
@@ -56,17 +58,21 @@ export class DataService {
 
   getAssetsList(height = null) {
     const heightParam = (height !== null) ? '?height=' + height : '';
-    return this.http.get<{assets: Asset[]}>(this.API_BASE + '/explorer/get_assets_list/' + heightParam, this.getQueryOptions());
+    return this.http.get<{ assets: Asset[] }>(this.API_BASE + '/explorer/get_assets_list/' + heightParam, this.getQueryOptions());
+  }
+
+  getFaucet(address) {
+    return this.http.post<any>(this.API_BASE_FAUCET + '/request', {address}, this.getQueryOptions());
   }
 
   private getQueryOptions() {
-      return {
-          withCredentials: true,
-      };
+    return {
+      withCredentials: true,
+    };
   }
 
   loadAssets(data) {
-    this.assetsList = data.assets.map(function(item) {
+    this.assetsList = data.assets.map(function (item) {
       const metadata = item.metadata;
 
       const assetNameIndex = metadata.indexOf(PARAMS.ASSET_NAME);
@@ -84,37 +90,37 @@ export class DataService {
       const colorIndex = metadata.indexOf(PARAMS.COLOR);
       const pdfLinkFromTo = metadata.indexOf(SEPARATOR, pdfUrlIndex);
       const assetItem = {
-          lock_height: item.lock_height,
-          value: item.value_lo,
-          id: item.id,
-          asset_name: assetNameIndex > 0 ?
-            metadata.slice(assetNameIndex + PARAMS.ASSET_NAME.length, metadata.indexOf(SEPARATOR, assetNameIndex)) : '',
-          asset_code: assetCodeIndex > 0 ?
-            metadata.slice(assetCodeIndex + PARAMS.ASSET_CODE.length, metadata.indexOf(SEPARATOR, assetCodeIndex)) : '',
-          unit_name: unitNameIndex > 0 ?
-            metadata.slice(unitNameIndex + PARAMS.UNIT_NAME.length, metadata.indexOf(SEPARATOR, unitNameIndex)) : '',
-          smallest_unit_name: smallestUnitNameIndex > 0 ?
-            metadata.slice(smallestUnitNameIndex + PARAMS.SM_UNIT_NAME.length,
+        lock_height: item.lock_height,
+        value: item.value_lo,
+        id: item.id,
+        asset_name: assetNameIndex > 0 ?
+          metadata.slice(assetNameIndex + PARAMS.ASSET_NAME.length, metadata.indexOf(SEPARATOR, assetNameIndex)) : '',
+        asset_code: assetCodeIndex > 0 ?
+          metadata.slice(assetCodeIndex + PARAMS.ASSET_CODE.length, metadata.indexOf(SEPARATOR, assetCodeIndex)) : '',
+        unit_name: unitNameIndex > 0 ?
+          metadata.slice(unitNameIndex + PARAMS.UNIT_NAME.length, metadata.indexOf(SEPARATOR, unitNameIndex)) : '',
+        smallest_unit_name: smallestUnitNameIndex > 0 ?
+          metadata.slice(smallestUnitNameIndex + PARAMS.SM_UNIT_NAME.length,
             metadata.indexOf(SEPARATOR, smallestUnitNameIndex)) : '',
-          schema_version: schemaVersionIndex > 0 ?
-            metadata.slice(schemaVersionIndex + PARAMS.SCHEMA_VERSION.length,
-              metadata.indexOf(SEPARATOR, schemaVersionIndex)) : '',
-          ratio: ratioIndex > 0 ?
-            metadata.slice(ratioIndex + PARAMS.RATIO.length, metadata.indexOf(SEPARATOR, ratioIndex)) : '',
-          short_desc: shortDescIndex > 0 ?
-            metadata.slice(shortDescIndex + PARAMS.SHORT_DESC.length, metadata.indexOf(SEPARATOR, shortDescIndex)) : '',
-          full_desc: longDescIndex > 0 ?
-            metadata.slice(longDescIndex + PARAMS.LONG_DESC.length, metadata.indexOf(SEPARATOR, longDescIndex)) : '',
-          site_url: siteUrlIndex > 0 ?
-            metadata.slice(siteUrlIndex + PARAMS.SITE_URL.length, metadata.indexOf(SEPARATOR, siteUrlIndex)) : '',
-          pdf_url: pdfUrlIndex > 0 ?
-            metadata.slice(pdfUrlIndex + PARAMS.PDF_URL.length, pdfLinkFromTo > 0 ? pdfLinkFromTo : metadata.length) : '',
-          favicon_url: faviconUrlIndex > 0 ?
-            metadata.slice(faviconUrlIndex + PARAMS.FAVICON_URL.length, metadata.indexOf(SEPARATOR, faviconUrlIndex)) : '',
-          logo_url: logoUrlIndex > 0 ?
-            metadata.slice(logoUrlIndex + PARAMS.LOGO_URL.length, metadata.indexOf(SEPARATOR, logoUrlIndex)) : '',
-          color: colorIndex > 0 ?
-            metadata.slice(colorIndex + PARAMS.COLOR.length, metadata.indexOf(SEPARATOR, colorIndex)) : ''
+        schema_version: schemaVersionIndex > 0 ?
+          metadata.slice(schemaVersionIndex + PARAMS.SCHEMA_VERSION.length,
+            metadata.indexOf(SEPARATOR, schemaVersionIndex)) : '',
+        ratio: ratioIndex > 0 ?
+          metadata.slice(ratioIndex + PARAMS.RATIO.length, metadata.indexOf(SEPARATOR, ratioIndex)) : '',
+        short_desc: shortDescIndex > 0 ?
+          metadata.slice(shortDescIndex + PARAMS.SHORT_DESC.length, metadata.indexOf(SEPARATOR, shortDescIndex)) : '',
+        full_desc: longDescIndex > 0 ?
+          metadata.slice(longDescIndex + PARAMS.LONG_DESC.length, metadata.indexOf(SEPARATOR, longDescIndex)) : '',
+        site_url: siteUrlIndex > 0 ?
+          metadata.slice(siteUrlIndex + PARAMS.SITE_URL.length, metadata.indexOf(SEPARATOR, siteUrlIndex)) : '',
+        pdf_url: pdfUrlIndex > 0 ?
+          metadata.slice(pdfUrlIndex + PARAMS.PDF_URL.length, pdfLinkFromTo > 0 ? pdfLinkFromTo : metadata.length) : '',
+        favicon_url: faviconUrlIndex > 0 ?
+          metadata.slice(faviconUrlIndex + PARAMS.FAVICON_URL.length, metadata.indexOf(SEPARATOR, faviconUrlIndex)) : '',
+        logo_url: logoUrlIndex > 0 ?
+          metadata.slice(logoUrlIndex + PARAMS.LOGO_URL.length, metadata.indexOf(SEPARATOR, logoUrlIndex)) : '',
+        color: colorIndex > 0 ?
+          metadata.slice(colorIndex + PARAMS.COLOR.length, metadata.indexOf(SEPARATOR, colorIndex)) : ''
       };
 
       return assetItem;

@@ -2,6 +2,10 @@
   <header class="header">
     <div class="header__content">
       <app-header-logo></app-header-logo>
+      <div class="links">
+        <a routerLink="/faucet" *ngIf="router.url !== '/faucet'">Get faucet</a>
+        <a routerLink="/" *ngIf="router.url !== '/'">Back</a>
+      </div>
     </div>
   </header>
 

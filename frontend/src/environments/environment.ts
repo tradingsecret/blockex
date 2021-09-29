@@ -9,6 +9,7 @@ export const environment = {
   reconnectInterval: 2000,
   // apiBaseUrl: 'https://masternet-explorer.beam.mw',
   apiBaseUrl: 'http://23.88.54.192',
+  apiBaseFaucetUrl: 'http://23.88.54.192:3000',
   envTitle: 'masternet'
 };
 

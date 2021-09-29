@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
-import { MainComponent, BlockDetailsComponent } from './containers';
+import {MainComponent, BlockDetailsComponent, FaucetComponent} from './containers';
 import { HeaderComponent } from '../../shared/components';
 import { MainLayoutComponent } from '../../shared/layouts';
 
@@ -17,13 +17,13 @@ const routes: Routes = [{
         }
     ]
   }, {
-    path: 'block',
+    path: 'faucet',
     children: [
-        {
-            path: '', component: HeaderComponent, outlet: 'header'
-        }, {
-            path: '', component: BlockDetailsComponent
-        }
+      {
+        path: '', component: HeaderComponent, outlet: 'header'
+      }, {
+        path: '', component: FaucetComponent
+      }
     ]
   }, {
     path: 'block/:hash',

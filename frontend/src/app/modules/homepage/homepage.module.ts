@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../../shared/shared.module';
 import { HomepageRoutingModule } from './homepage-routing.module';
-import { MainComponent, BlockDetailsComponent } from './containers';
+import { MainComponent, BlockDetailsComponent, FaucetComponent } from './containers';
 import { GraphsComponent, StatusCardsComponent, TableComponent, PoweredByComponent} from './components';
 
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
@@ -15,11 +15,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     MainComponent,
     BlockDetailsComponent,
+    FaucetComponent,
     StatusCardsComponent,
     GraphsComponent,
     TableComponent,
@@ -38,6 +40,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
         MatCardModule,
         MatTableModule,
         NgApexchartsModule,
+        ReactiveFormsModule,
     ]
 })
 export class HomepageModule { }
