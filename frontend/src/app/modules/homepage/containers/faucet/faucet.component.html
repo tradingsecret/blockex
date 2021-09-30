@@ -10,7 +10,7 @@
         <hr/>
         <div class="card border-top border-0 border-4 border-white">
           <div class="card-body p-5">
-            <form [formGroup] = "formdata" class="row g-3" (ngSubmit)="getFaucet($event)">
+            <form [formGroup] = "formdata" class="row g-3" (ngSubmit)="getFaucet()">
               <div style="color: green" *ngIf="success !== null">{{ success }}</div>
               <div class="col-12">
                 <label for="inputAddress" class="form-label">Receive address</label>

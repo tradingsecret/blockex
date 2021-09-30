@@ -61,8 +61,8 @@ export class DataService {
     return this.http.get<{ assets: Asset[] }>(this.API_BASE + '/explorer/get_assets_list/' + heightParam, this.getQueryOptions());
   }
 
-  getFaucet(address) {
-    return this.http.post<any>(this.API_BASE_FAUCET + '/request', {address}, this.getQueryOptions());
+  getFaucet(address, recaptcha, browser) {
+    return this.http.post<any>(this.API_BASE_FAUCET + '/request', {address, recaptcha, browser}, this.getQueryOptions());
   }
 
   private getQueryOptions() {
