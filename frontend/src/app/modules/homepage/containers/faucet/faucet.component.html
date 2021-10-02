@@ -1,24 +1,24 @@
 <section class="faucet-container">
   <div class="card_header">
-    <div class="card_header_title">Get faucet</div>
+    <div class="card_header_title">Request testnet Arctis (ARC) coins</div>
   </div>
 
   <div class="main">
     <div class="row">
       <div class="col-xl-7 mx-auto">
-        <h6 class="mb-0 text-uppercase">You will receive 25 ARC</h6>
+        <h6 class="mb-0 text-uppercase">REQUEST 25 ARC</h6>
         <hr/>
         <div class="card border-top border-0 border-4 border-white">
           <div class="card-body p-5">
             <form [formGroup] = "formdata" class="row g-3" (ngSubmit)="getFaucet()">
               <div style="color: green" *ngIf="success !== null">{{ success }}</div>
               <div class="col-12">
-                <label for="inputAddress" class="form-label">Receive address</label>
-                <textarea class="form-control" id="inputAddress" placeholder="Enter your receive address..." rows="3" formControlName = "address"></textarea>
+                <label for="inputAddress" class="form-label">Recipient address</label>
+                <textarea class="form-control" id="inputAddress" placeholder="Enter recipient address here..." rows="3" formControlName = "address"></textarea>
                 <div style="color: red" *ngIf="error !== null">{{ error }}</div>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-light px-5">Receive</button>
+                <button type="submit" class="btn btn-light px-5">GET ARC</button>
               </div>
             </form>
           </div>
