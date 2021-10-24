@@ -260,7 +260,7 @@ def update_blockchain():
     total_coins_emission = _redis.get('total_coins_emission')
 
     if not total_coins_emission:
-        total_coins_emission = HEIGHT_STEP * 60 * 100
+        total_coins_emission = HEIGHT_STEP * 600 * 100
         _redis.set('total_coins_emission', total_coins_emission)
 
     # Next treasury emission block height
