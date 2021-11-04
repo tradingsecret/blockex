@@ -33,13 +33,13 @@ export class FaucetComponent implements OnInit {
         this.dataService.getFaucet(this.formdata.value.address, recaptcha, result.visitorId).subscribe(
           (data) => {
             this.error = null;
-            this.success = 'Your arcs sent.';
+            this.success = 'Requested ARC coins were successfully sent.';
           },
           (err) => {
             this.success = null;
 
             if (err.status === 422 && err.error.errors[0].param === 'limit') {
-              this.error = 'Requests limit is 1 request per day.';
+              this.error = 'Error: Request limit reached (limit: one request per day).';
             }
             else if (err.status === 422) {
               this.error = 'Enter correct arcs address.';
