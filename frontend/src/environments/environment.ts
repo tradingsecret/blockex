@@ -5,11 +5,11 @@
 export const environment = {
   production: true,
   // wsEndpoint: 'wss://masternet-explorer.beam.mw/ws/explorer/',
-  wsEndpoint: 'ws://23.88.54.192/ws/explorer/',
+  wsEndpoint: 'wss://testnet.imperiumprotocol.com/ws/explorer/',
   reconnectInterval: 2000,
   // apiBaseUrl: 'https://masternet-explorer.beam.mw',
-  apiBaseUrl: 'http://23.88.54.192',
-  apiBaseFaucetUrl: 'http://23.88.54.192:3000',
+  apiBaseUrl: 'https://testnet.imperiumprotocol.com',
+  apiBaseFaucetUrl: 'http://imperiumprotocol.com:3000',
   envTitle: 'masternet',
   reCAPTCHA: '6Lc4oQMaAAAAAGC66NuYvF_ZJbK6UEw1czgESJpr',
 };
