@@ -62,7 +62,7 @@ export class DataService {
   }
 
   getFaucet(address, recaptcha, browser) {
-    return this.http.post<any>(this.API_BASE_FAUCET + '/request', {address, recaptcha, browser}, this.getQueryOptions());
+    return this.http.post<any>(this.API_BASE_FAUCET + '/getFaucet', {address, recaptcha, browser}, this.getQueryOptions());
   }
 
   private getQueryOptions() {
