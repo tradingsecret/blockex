@@ -9,7 +9,7 @@ export const environment = {
   reconnectInterval: 2000,
   // apiBaseUrl: 'https://masternet-explorer.beam.mw',
   apiBaseUrl: 'https://testnet5435345345.imperiumprotocol.com',
-  apiBaseFaucetUrl: 'http://imperiumprotocol.com:3000',
+  apiBaseFaucetUrl: 'https://testnet5435345345.imperiumprotocol.com',
   envTitle: 'masternet',
   reCAPTCHA: '6Lc4oQMaAAAAAGC66NuYvF_ZJbK6UEw1czgESJpr',
 };
