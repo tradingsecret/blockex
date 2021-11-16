@@ -56,6 +56,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        position: relative;
 
         &__assets-button {
             @include text-color();
@@ -172,16 +173,39 @@
 }
 
 .links {
-  a {
-    color: rgb(255 255 255 / 75%);
+  position: absolute;
+  right: 140px;
+  top: 67px;
+
+  a, span {
+    color: white; //rgb(255 255 255 / 75%);
     letter-spacing: .5px;
     font-size: 20px;
     text-decoration: none;
+    padding-right: 40px;
+    cursor: pointer;
 
     &:hover {
       color: #ffffff !important;
     }
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &.inactive {
+      color: darkgray;
+
+      &:hover {
+        color: darkgray !important;
+      }
+    }
   }
+}
+
+app-header-search {
+  margin-top: 20px;
+  display: block;
 }
 
 @media(max-width: 1400px) {

@@ -4,7 +4,7 @@ import {RECAPTCHA_V3_SITE_KEY, RecaptchaSettings, RecaptchaV3Module} from 'ng-re
 
 import { SharedModule } from '../../shared/shared.module';
 import { HomepageRoutingModule } from './homepage-routing.module';
-import { MainComponent, BlockDetailsComponent, FaucetComponent } from './containers';
+import { MainComponent, BlockDetailsComponent, FaucetComponent, MediaComponent } from './containers';
 import { GraphsComponent, StatusCardsComponent, TableComponent, PoweredByComponent} from './components';
 
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
@@ -24,6 +24,7 @@ import {environment} from '../../../environments/environment';
     MainComponent,
     BlockDetailsComponent,
     FaucetComponent,
+    MediaComponent,
     StatusCardsComponent,
     GraphsComponent,
     TableComponent,
