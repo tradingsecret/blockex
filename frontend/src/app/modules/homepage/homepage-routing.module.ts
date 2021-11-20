@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
-import {MainComponent, BlockDetailsComponent, FaucetComponent, MediaComponent} from './containers';
+import {MainComponent, BlockDetailsComponent, FaucetComponent, MediaComponent, ProductsComponent} from './containers';
 import { HeaderComponent } from '../../shared/components';
 import { MainLayoutComponent } from '../../shared/layouts';
 
@@ -32,6 +32,15 @@ const routes: Routes = [{
         path: '', component: HeaderComponent, outlet: 'header'
       }, {
         path: '', component: MediaComponent
+      }
+    ]
+  }, {
+    path: 'products',
+    children: [
+      {
+        path: '', component: HeaderComponent, outlet: 'header'
+      }, {
+        path: '', component: ProductsComponent
       }
     ]
   }, {

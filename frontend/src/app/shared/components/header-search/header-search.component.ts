@@ -23,7 +23,7 @@ export class HeaderSearchComponent implements OnInit, AfterViewInit {
     ) {}
 
   ngOnInit(): void {
-    this.placeholderVal = 'Search regular transactions...';
+    this.placeholderVal = 'Search here any transactions if they are not anonymous';
     // this.placeholderVal =  this.isAssetsVal ? 'Search by asset, description, ratio' : 'Search by height, hash, kernel ID';
   }
 

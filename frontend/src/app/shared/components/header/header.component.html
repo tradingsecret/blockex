@@ -2,7 +2,49 @@
   <header class="header">
     <div class="header__content">
       <app-header-logo></app-header-logo>
-      <div class="links">
+
+      <div class="hamburger" [class.active]="isMobileMenuActive" (click)="toggleMobileMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+          <g stroke-width="6.5" stroke-linecap="round">
+            <path
+              d="M72 82.286h28.75"
+              fill="#009100"
+              fill-rule="evenodd"
+              stroke="#fff"
+            />
+            <path
+              d="M100.75 103.714l72.482-.143c.043 39.398-32.284 71.434-72.16 71.434-39.878 0-72.204-32.036-72.204-71.554"
+              fill="none"
+              stroke="#fff"
+            />
+            <path
+              d="M72 125.143h28.75"
+              fill="#009100"
+              fill-rule="evenodd"
+              stroke="#fff"
+            />
+            <path
+              d="M100.75 103.714l-71.908-.143c.026-39.638 32.352-71.674 72.23-71.674 39.876 0 72.203 32.036 72.203 71.554"
+              fill="none"
+              stroke="#fff"
+            />
+            <path
+              d="M100.75 82.286h28.75"
+              fill="#009100"
+              fill-rule="evenodd"
+              stroke="#fff"
+            />
+            <path
+              d="M100.75 125.143h28.75"
+              fill="#009100"
+              fill-rule="evenodd"
+              stroke="#fff"
+            />
+          </g>
+        </svg>
+      </div>
+
+      <div class="links" [class.active]="isMobileMenuActive">
         <a routerLink="/">Home</a>
         <span class="inactive">Blockchain</span>
         <span class="inactive">Developers APIs</span>
@@ -10,13 +52,45 @@
         <a routerLink="/media">Media</a>
         <a target="_blank" href="https://insiderprotocol.com">Insider Protocol</a>
         <a routerLink="/faucet">Get ARC</a>
-        <!--<a routerLink="/faucet" *ngIf="router.url !== '/faucet'">Get faucet</a>
-        <a routerLink="/" *ngIf="router.url !== '/'">Back</a>-->
       </div>
     </div>
   </header>
 
   <app-header-search [isAssetsVal]=isAssets></app-header-search>
 
+  <div class="presentation" *ngIf="router.url === '/'">
+    <div class="text">
+      <p>
+        Imperium Protocol is a cryptocurrency blockchain based on
+        the MimbleWimble protocol. MimbleWimble is an innovative
+        technology that brings scalability to private blockchain
+        transactions.
+      </p>
+
+      <p>
+        Our blockchain offers two types of transactions: regular
+        transactions with fast speed and slower transactions but
+        are fully anonymous and untraceable.
+      </p>
+
+      <p>
+        Arctis is a testnet coin that has no value and was created
+        only for public tests.
+      </p>
+
+      <div class="download_links">
+        <a href="">Download Wallet (WinOS)</a>
+        <a href="">Download Wallet (MacOS)</a>
+      </div>
+    </div>
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/pK9-hxGACiU" title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+
   <app-top-chart *ngIf="router.url === '/'"></app-top-chart>
 </ng-container>
+

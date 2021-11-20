@@ -1,0 +1,126 @@
+@import "../../../../../assets/vertical/assets/css/app.css";
+@import "../../../../../assets/vertical/assets/css/icons.css";
+@import "../../../../../assets/vertical/assets/css/bootstrap.min.css";
+
+
+.products-container {
+  box-shadow: none;
+  padding: 0 140px;
+
+  .card_header {
+    color: white;
+    padding-top: 70px;
+    padding-bottom: 30px;
+  }
+
+  .card_header_title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Tomorrow-Regular', serif;
+  }
+
+  .main {
+    //border-radius: 5px;
+    //background-color: rgba(255, 255, 255, 0.05);
+    //box-shadow: 0px 0px 7px -2px rgba(255, 255, 255, 0.05);
+    // max-width: 1024px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    padding: 40px 70px 30px;
+    color: white;
+    font-weight: bold;
+
+    .products_list {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+
+      .product_item {
+        width: 50%;
+        margin-bottom: 20em;
+        height: 90px;
+
+        .element {
+          max-width: 550px;
+          margin: 0 auto;
+
+          a, span {
+            height: 100px;
+            display: block;
+            max-width: 450px;
+            margin: 0 auto;
+            cursor: pointer;
+
+            div {
+              background: 50%/contain no-repeat;
+              height: 100%;
+              display: none;
+            }
+
+            div:first-child {
+              display: block;
+            }
+
+            &:hover {
+              div:first-child {
+                display: none;
+              }
+
+              div:last-child {
+                display: block;
+              }
+            }
+          }
+
+          .text {
+            margin-top: 50px;
+            text-align: center;
+            font-family: 'Tomorrow-Regular', serif;
+            font-size: 20px;
+          }
+        }
+
+        .element.inactive {
+          a, span {
+            cursor: default !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .products-container {
+    .main {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .products-container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-container {
+    .main {
+      .products_list {
+        display: block;
+
+        .product_item {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

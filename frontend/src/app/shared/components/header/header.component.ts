@@ -11,6 +11,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class HeaderComponent implements OnInit {
   public isAssets = this.router.url.split('/')[1] === 'assets';
   public isMobile = this.deviceService.isMobile();
+  public isMobileMenuActive = false;
   public componentParams = {
     isSearchInputVisible: false,
     isAssetsButtonVisible: false
@@ -32,5 +33,9 @@ export class HeaderComponent implements OnInit {
   assetsControlClicked() {
     this.componentParams.isAssetsButtonVisible = !this.componentParams.isAssetsButtonVisible;
     this.componentParams.isSearchInputVisible = false;
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuActive = !this.isMobileMenuActive;
   }
 }

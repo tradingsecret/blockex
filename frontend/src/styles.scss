@@ -1,33 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
 
 html {
-      &,
-      body {
-          width: 100%;
-          position: relative;
-      }
-  
-      body {
-          background-color: #fff;
-          margin: 0 auto;
-          //noinspection CssUnknownProperty
-          overflow-anchor: none;
-      }
+  &,
+  body {
+    width: 100%;
+    position: relative;
+  }
+
+  body {
+    background-color: #fff;
+    margin: 0 auto;
+    //noinspection CssUnknownProperty
+    overflow-anchor: none;
+  }
 }
 
 @font-face {
-    font-family: "ProximaNova";
-    src: url("./assets/fonts/proximanova-regular.otf");
+  font-family: "ProximaNova";
+  src: url("./assets/fonts/proximanova-regular.otf");
 }
 
 @font-face {
-    font-family: "ProximaNovaIt";
-    src: url("./assets/fonts/ProximaNova-RegularIt.ttf");
+  font-family: "ProximaNovaIt";
+  src: url("./assets/fonts/ProximaNova-RegularIt.ttf");
+}
+
+@font-face {
+  font-family: "AgencyB";
+  src: url("./assets/fonts/AGENCYB.otf");
+}
+
+@font-face {
+  font-family: "AgencyR";
+  src: url("./assets/fonts/AGENCYR.otf");
+}
+
+@font-face {
+  font-family: "Tomorrow-Regular";
+  src: url("./assets/fonts/Tomorrow-Regular.otf");
+}
+
+@font-face {
+  font-family: "Tomorrow-SemiBold";
+  src: url("./assets/fonts/Tomorrow-SemiBold.otf");
 }
 
 * {
-    font-family: 'ProximaNova', sans-serif;
+  font-family: 'Tomorrow-Regular', serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}

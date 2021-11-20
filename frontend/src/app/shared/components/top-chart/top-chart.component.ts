@@ -130,8 +130,6 @@ export class TopChartComponent {
         },
       }
     };
-
-      console.log('data update', data);
     });
 
   }

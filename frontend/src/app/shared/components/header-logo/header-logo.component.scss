@@ -1,36 +1,25 @@
 .logo {
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
+  display: block;
+  flex-direction: row;
 
-    &__title {
-        ::before {
-          font-family: boxicons;
-          content: "\e9d0";
-          margin-top: 10px;
-          font-size: 23px;
-        }
+  &__imperium {
+    margin: 0 auto;
+    width: 494px;
+    height: 120px;
+    background-image: url(../../../../../src/assets/imperium-logo.png);
+  }
+}
 
-        margin-left: 25px;
-        display: flex;
-        flex-direction: column;
-
-        &__imperium {
-            color: #ffffff;;
-            text-shadow: 1px 0 #25c1ff;
-            font-weight: bold;
-            line-height: 1.2;
-            font-style: normal;
-            font-stretch: normal;
-            overflow: hidden;
-            font-size: 30px;
-            letter-spacing: 2px;
-        }
-
-        &__text {
-            margin-top: auto;
-            color: #ffffff;
-            font-size: 13px;
-        }
+@media (max-width: 950px) {
+  .logo {
+    &__imperium {
+      width: 50vw;
+      height: 10vw;
+      min-width: 300px;
+      min-height: 70px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
+  }
 }
