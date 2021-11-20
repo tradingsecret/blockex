@@ -41,7 +41,6 @@ export class TopChartComponent {
     const data = this.dataService.loadTopChart().subscribe((data) => {
       this.chartOptions = {
       series: [{
-        name: 'Transactions',
         data: data.data.data,
       }],
       chart: {
@@ -71,10 +70,10 @@ export class TopChartComponent {
         categories: data.data.categories,
       },
       title: {
-        text: '',
-        align: 'left',
+        text: 'Transactions',
+        align: 'center',
         style: {
-          fontSize: '16px',
+          fontSize: '24px',
           color: '#fff'
         }
       },
@@ -124,11 +123,6 @@ export class TopChartComponent {
         }
       },
       colors: ['#fff'],
-      yaxis: {
-        title: {
-          text: 'Transactions',
-        },
-      }
     };
     });
 

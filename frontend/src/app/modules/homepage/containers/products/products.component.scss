@@ -60,11 +60,11 @@
             div {
               background: 50%/contain no-repeat;
               height: 100%;
-              display: none;
+              opacity: 0;
             }
 
             div:first-child {
-              display: block;
+              opacity: 1;
             }
 
             &:hover {
@@ -73,7 +73,7 @@
               }
 
               div:last-child {
-                display: block;
+                opacity: 1;
               }
             }
           }

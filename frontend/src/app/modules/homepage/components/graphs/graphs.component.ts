@@ -205,7 +205,20 @@ export class GraphsComponent implements OnInit, OnDestroy {
         align: 'center',
         verticalAlign: 'top',
         x: 40,
-        y: 10
+        y: 10,
+        accessibility: {
+          enabled: false,
+        },
+      },
+      plotOptions: {
+        series: {
+          events: {
+            // tslint:disable-next-line:only-arrow-functions typedef
+            legendItemClick() {
+              return false;
+            }
+          }
+        }
       },
       tooltip: {
         followPointer: false,
@@ -272,6 +285,16 @@ export class GraphsComponent implements OnInit, OnDestroy {
         x: 40,
         y: 10
       },
+      plotOptions: {
+        series: {
+          events: {
+            // tslint:disable-next-line:only-arrow-functions typedef
+            legendItemClick() {
+              return false;
+            }
+          }
+        }
+      },
       tooltip: {
         followPointer: false,
         useHTML: true,
@@ -337,6 +360,16 @@ export class GraphsComponent implements OnInit, OnDestroy {
         x: 40,
         y: 10,
       },
+      plotOptions: {
+        series: {
+          events: {
+            // tslint:disable-next-line:only-arrow-functions typedef
+            legendItemClick() {
+              return false;
+            }
+          }
+        }
+      },
       tooltip: {
         followPointer: false,
         useHTML: true,
@@ -400,6 +433,16 @@ export class GraphsComponent implements OnInit, OnDestroy {
         verticalAlign: 'top',
         x: 40,
         y: 10
+      },
+      plotOptions: {
+        series: {
+          events: {
+            // tslint:disable-next-line:only-arrow-functions typedef
+            legendItemClick() {
+              return false;
+            }
+          }
+        }
       },
       tooltip: {
         followPointer: false,

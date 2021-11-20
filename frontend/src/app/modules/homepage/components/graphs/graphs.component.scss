@@ -48,7 +48,7 @@
     width: 100%;
     overflow: hidden;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     //justify-content: space-between;
 
     &__left {
@@ -60,7 +60,7 @@
           padding: 0 5px;
           display: flex;
           flex-direction: column;
-          width: 50%;
+          width: 100%;
 
           &__elem {
             margin-top: 30px;
@@ -433,7 +433,25 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: 0.5px;
-    fill: #ffffff;
+    fill: white;
+    cursor: default;
+}
+
+.highcharts-legend-item text {
+  &:hover {
+    color: white !important;
+    fill: white !important;
+  }
+}
+
+.highcharts-legend {
+  .highcharts-graph {
+    display: none;
+  }
+
+  .highcharts-point {
+    display: none;
+  }
 }
 
 
