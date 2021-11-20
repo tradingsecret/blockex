@@ -511,6 +511,10 @@
     .column div {
       margin-bottom: 10px;
       text-align: center;
+
+      a:hover {
+        text-decoration: none;
+      }
     }
   }
 }

@@ -53,6 +53,21 @@
           div {
             background: 50%/contain no-repeat;
             height: 100%;
+            display: none;
+          }
+
+          div:first-child {
+            display: block;
+          }
+
+          &:hover {
+            div:first-child {
+              display: none;
+            }
+
+            div:last-child {
+              display: block;
+            }
           }
         }
       }

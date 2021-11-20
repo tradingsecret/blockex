@@ -275,7 +275,7 @@
   }
 
   app-header-search {
-    margin-top: 0px !important;
+    margin-top: 0 !important;
   }
 
   .links {
@@ -283,6 +283,10 @@
   }
 
   .links.active {
+
+    a, span {
+      padding-right: 0;
+    }
 
     &::before {
       content: "";
@@ -348,6 +352,10 @@
       a {
         color: #bbe205 !important;
         font-family: 'Tomorrow-Regular', sans-serif !important;
+
+        &:hover {
+          text-decoration: none;
+        }
       }
     }
   }

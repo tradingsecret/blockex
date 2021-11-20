@@ -49,12 +49,23 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    //justify-content: space-between;
 
     &__left {
         display: flex;
-        flex-direction: column;
-        width: 50%;
+        //flex-direction: column;
+        width: 100%;
+
+        &__block {
+          padding: 0 5px;
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+
+          &__elem {
+            margin-top: 30px;
+          }
+        }
 
         &__block {
             padding: 0 5px;
@@ -416,7 +427,7 @@
 }
 
 .highcharts-legend-item > text {
-    font-size: 12px;
+    font-size: 24px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
@@ -744,5 +755,9 @@
 
   .graphs__left, .graphs__right {
     width: 100% !important;
+
+    &__block {
+      width: 100%;
+    }
   }
 }

@@ -167,8 +167,9 @@ export class GraphsComponent implements OnInit, OnDestroy {
         shadow: false,
         height: 450,
         ignoreHiddenSeries: false,
-        type: 'line',
-        styledMode: true
+        type: 'spline',
+        styledMode: true,
+        borderRadius: 20
       },
       credits: {
           enabled: false
@@ -184,7 +185,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         min: 0,
         title: {
           rotation: 270,
-          text: this.isMobile ? '' : 'Average difficulty',
+          text: '',
           margin: 34
         }
       }],
@@ -198,11 +199,11 @@ export class GraphsComponent implements OnInit, OnDestroy {
         }
       },
       legend: {
-        width: 380,
-        itemWidth: 190,
+        width: 350,
+        itemWidth: 350,
         layout: 'horizontal',
         align: 'center',
-        verticalAlign: 'bottom',
+        verticalAlign: 'top',
         x: 40,
         y: 10
       },
@@ -214,7 +215,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         formatter: this.tooltipFormatter
       },
       series: [{
-        type: 'line',
+        type: 'spline',
         marker: {
           enabledThreshold: 0,
           radius: 2,
@@ -234,7 +235,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         shadow: false,
         height: 450,
         ignoreHiddenSeries: false,
-        type: 'line',
+        type: 'spline',
         styledMode: true
       },
       credits: {
@@ -249,7 +250,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       yAxis: [{
         title: {
-          text: this.isMobile ? '' : 'Blocks per hour',
+          text: this.isMobile ? '' : '',
           margin: 34
         }
       }, ],
@@ -264,10 +265,10 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       legend: {
         width: 380,
-        itemWidth: 190,
+        itemWidth: 380,
         layout: 'horizontal',
         align: 'center',
-        verticalAlign: 'bottom',
+        verticalAlign: 'top',
         x: 40,
         y: 10
       },
@@ -279,7 +280,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         formatter: this.tooltipFormatter
       },
       series: [{
-        type: 'line',
+        type: 'spline',
         marker: {
           enabledThreshold: 0,
           radius: 2,
@@ -298,7 +299,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         shadow: false,
         height: 450,
         ignoreHiddenSeries: false,
-        type: 'line',
+        type: 'spline',
         styledMode: true,
       },
       credits: {
@@ -314,7 +315,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       yAxis: [{
         lineColor: '#ff51ff',
         title: {
-          text: this.isMobile ? '' : 'Regular transactions amount',
+          text: this.isMobile ? '' : '',
           margin: 34
         },
       }],
@@ -329,10 +330,10 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       legend: {
         width: 450,
-        itemWidth: 90,
+        itemWidth: 450,
         layout: 'horizontal',
         align: 'center',
-        verticalAlign: 'bottom',
+        verticalAlign: 'top',
         x: 40,
         y: 10,
       },
@@ -344,13 +345,13 @@ export class GraphsComponent implements OnInit, OnDestroy {
         formatter: this.tooltipFormatter
       },
       series: [{
-        type: 'line',
+        type: 'spline',
         marker: {
           enabledThreshold: 0,
           radius: 2,
           symbol: 'circle',
         },
-        name: 'Regular',
+        name: 'Regular transactions amount',
         data: graphs.transactions
       }, ],
     });
@@ -363,7 +364,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
         shadow: false,
         height: 450,
         ignoreHiddenSeries: false,
-        type: 'line',
+        type: 'spline',
         styledMode: true
       },
       credits: {
@@ -378,7 +379,7 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       yAxis: [{
         title: {
-          text: this.isMobile ? '' : 'Shielded transactions amount',
+          text: this.isMobile ? '' : '',
           margin: 34
         }
       }],
@@ -393,10 +394,10 @@ export class GraphsComponent implements OnInit, OnDestroy {
       },
       legend: {
         width: 450,
-        itemWidth: 90,
+        itemWidth: 450,
         layout: 'horizontal',
         align: 'center',
-        verticalAlign: 'bottom',
+        verticalAlign: 'top',
         x: 40,
         y: 10
       },
@@ -408,13 +409,13 @@ export class GraphsComponent implements OnInit, OnDestroy {
         formatter: this.tooltipFormatter
       },
       series: [{
-        type: 'line',
+        type: 'spline',
         marker: {
           enabledThreshold: 0,
           radius: 2,
           symbol: 'circle',
         },
-        name: 'Shielded',
+        name: 'Shielded transactions amount',
         data: graphs.lelantus_trs
       }],
     });
