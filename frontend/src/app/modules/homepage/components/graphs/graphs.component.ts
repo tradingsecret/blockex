@@ -117,8 +117,6 @@ export class GraphsComponent implements OnInit, OnDestroy {
         maximumFractionDigits = 8;
     }
     return '<div class="chart-tooltip-container">' +
-      '<span class="tooltip-line-color">\u2015\u2015</span>' +
-      '<div class="tooltip-line-circle"></div>' +
       '<div class="tooltip-title">' + this.series.name + '</div>' +
       '<div class="tooltip-date">' + date.getDate() + ' ' +
           new Intl.DateTimeFormat('en-US', {month: 'long'}).format(date) + ' ' +

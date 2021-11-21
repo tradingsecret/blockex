@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   public isAssets = this.router.url.split('/')[1] === 'assets';
   public isMobile = this.deviceService.isMobile();
   public isMobileMenuActive = false;
+  public playVideo = false;
   public componentParams = {
     isSearchInputVisible: false,
     isAssetsButtonVisible: false

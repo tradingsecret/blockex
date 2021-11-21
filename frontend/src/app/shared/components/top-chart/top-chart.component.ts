@@ -41,6 +41,7 @@ export class TopChartComponent {
     const data = this.dataService.loadTopChart().subscribe((data) => {
       this.chartOptions = {
       series: [{
+        name: 'Transactions',
         data: data.data.data,
       }],
       chart: {

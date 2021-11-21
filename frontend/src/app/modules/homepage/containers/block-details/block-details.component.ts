@@ -37,6 +37,7 @@ export class BlockDetailsComponent implements OnInit {
       private deviceService: DeviceDetectorService,
       private dataService: DataService,
       private route: ActivatedRoute) {
+
     route.queryParams.subscribe(params => {
       if (params.searched_by !== undefined) {
         this.searchedBy = params.searched_by;
@@ -72,7 +73,7 @@ export class BlockDetailsComponent implements OnInit {
       day: 'numeric', hour: 'numeric',
       minute: 'numeric', second: 'numeric' });
     this.block.kernelsCnt = blockItem.kernels.length;
-    this.block.fee = blockItem.fee;
+    this.block.fee = blockItem.fee / 100000000;
     this.block.data = [
       {name: 'FEE:', value: blockItem.fee, additional: blockItem.fee !== 0 ? 'Groth' : ''},
       {name: 'HASH:', value: blockItem.hash, additional: ''},
