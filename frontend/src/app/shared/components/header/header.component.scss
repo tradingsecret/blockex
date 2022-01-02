@@ -378,9 +378,6 @@
     }
 
     .play_background {
-      position: absolute;
-      z-index: 1;
-
       width: 100%;
       height: 100%;
 
@@ -422,9 +419,23 @@
 @media (max-width: 700px) {
   .presentation {
     .video {
+      width: 90%;
+      min-width: 90%;
+      height: 70vw !important;
+      min-height: 70vw !important;
+
+      .play_background {
+        width: 100% !important;
+        background-size: cover;
+      }
+
       video {
-        width: 80vw;
-        height: 50vw;
+        //width: 80vw;
+        width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+        height: 70vw !important;
+        min-height: 70vw !important;
       }
     }
   }
